@@ -30,7 +30,7 @@ public class Mapa {
         this.miniX = Math.abs(this.x)/2;
         this.miniY = Math.abs(this.y)/2;
         this.lokality = new Lokalita[9];
-        this.lokality[0] = new Lokalita("lokalita1", "popis lokality", 0, 0);
+        this.lokality[0] = new Lokalita("lokalita1", "popis lokality", 1450, 900);
         HernyObjekt prekazka = new Drak(7, "/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Prekazky/Postavy/Monstra/Obrazky/idle_", 700, 800);
         HernyObjekt prekazka1 = new Drak(7, "/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Prekazky/Postavy/Monstra/Obrazky/idle_", 1000, 800);
         HernyObjekt prekazka2 = new Drak(7, "/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Prekazky/Postavy/Monstra/Obrazky/idle_", 1200, 400);
@@ -69,7 +69,6 @@ public class Mapa {
             }
         }
 
-        //update Lokalita prekazky
         this.lokality[0].setPoloha( this.x - xBefore , this.y - yBefore);
     }
 

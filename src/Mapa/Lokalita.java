@@ -28,7 +28,10 @@ public class Lokalita {
     }
 
     public void pridajPrekazku(HernyObjekt prekazka) {
+        //set x and y of the object + x and y of the location
         this.prekazky.add(prekazka);
+        prekazka.setX(prekazka.getX() + this.x);
+        prekazka.setY(prekazka.getY() + this.y);
     }
 
     public void pridajQuest(Quest quest) {
