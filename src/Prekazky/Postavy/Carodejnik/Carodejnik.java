@@ -9,9 +9,9 @@ import fri.shapesge.Kruh;
 import fri.shapesge.Obrazok;
 
 public class Carodejnik extends Postava {
-    private Mapa mapa;
-    private Obrazok miniMapa;
-    private Kruh kruh;
+    private final Mapa mapa;
+    private final Obrazok miniMapa;
+    private final Kruh kruh;
 
     private Inventar inventar;
     public Carodejnik(int pocetObrazkov, String nazov, int x, int y, Mapa mapa) {
@@ -52,7 +52,6 @@ public class Carodejnik extends Postava {
     public void chodVlavo() {
         if (this.mapa.getX() == 0 || super.getX() != 725) {
             super.posunNa(super.getX() - 10, super.getY());
-            System.out.println("postava" + super.getX());
 
         }
         this.krok("Walk_West_");
@@ -60,7 +59,6 @@ public class Carodejnik extends Postava {
         this.hybeSa();
         if (super.getX() == 725){
             this.mapa.nastavPolohu("vlavo");
-            System.out.println("mapa");
         }
     }
 
@@ -79,10 +77,8 @@ public class Carodejnik extends Postava {
     public void ukazMiniMapu() {
         this.miniMapa.zobraz();
         if (super.getX() == 725 && super.getY() == 450) {
-            //funguje spravne
-            this.kruh.zmenPolohu((int) (this.mapa.getMiniX()), (int) (this.mapa.getMiniY()));
+            this.kruh.zmenPolohu(this.mapa.getMiniX() + 242, this.mapa.getMiniY()+150);
         } else {
-            //treba opravit
             this.kruh.zmenPolohu(super.getX(), super.getY());
         }
         this.kruh.zobraz();

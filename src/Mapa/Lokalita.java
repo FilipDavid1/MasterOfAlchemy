@@ -5,13 +5,16 @@ import Prekazky.HernyObjekt;
 import java.util.ArrayList;
 
 public class Lokalita {
-    private String nazov;
-    private String popis;
+    private final String nazov;
+    private final String popis;
     private boolean viditelna;
     private boolean navstivena;
 
-    private int x;
-    private int y;
+    public final static int SIRKA_LOKALITY = 1450;
+    public final static int VYSKA_LOKALITY = 900;
+
+    private final int x;
+    private final int y;
 
     private ArrayList<HernyObjekt> prekazky;
     private ArrayList<Quest> questy;
@@ -69,11 +72,9 @@ public class Lokalita {
     }
 
     public void setPoloha(int x, int y) {
-        System.out.println("Lokalita na suradniciach x: " + x + " y: " + y);
         for (HernyObjekt hernyObjekt : this.prekazky) {
             hernyObjekt.setX(hernyObjekt.getX() + x);
             hernyObjekt.setY(hernyObjekt.getY() + y);
-            System.out.println("Prekazka na suradniciach x: " + x + " y: " + y);
         }
     }
 
