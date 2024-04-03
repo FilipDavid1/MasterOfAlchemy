@@ -9,11 +9,16 @@ public abstract class Postava extends HernyObjekt {
 
     private OrientaciaPostavy orientacia;
 
+    private HpBar hpBar;
+
 
     public Postava(int pocetObrazkov, String cestaKObrazku, int x, int y) {
         super(pocetObrazkov, cestaKObrazku, x, y);
         this.orientacia = OrientaciaPostavy.SOUTH;
+        this.hpBar = new HpBar(x-20, y - 10);
     }
+
+    public abstract void utok(Postava postava);
 
     @Override
     public void nastavObrazok() {
@@ -22,9 +27,21 @@ public abstract class Postava extends HernyObjekt {
         this.obrazok.zobraz();
     }
 
-    protected abstract void krok(String nazov);
+    public void krok(String imgName){
+        animacia++;
+        if (animacia >= super.getPocetObrazkov()) {
+            animacia = 0;
+        }
+        obrazok.zmenObrazok(super.getCestaKObrazku() + "Walk/" + imgName + animacia + ".png");
+    }
 
-    protected abstract void idleAnimacia(String imgNazov);
+    public void idleAnimacia(String imgNazov){
+        animacia++;
+        if (animacia >= super.getPocetObrazkov()) {
+            animacia = 0;
+        }
+        obrazok.zmenObrazok(  imgNazov + animacia + ".png");
+    }
 
     protected void posunNa(int x, int y) {
         obrazok.zmenPolohu(x, y);
@@ -51,5 +68,17 @@ public abstract class Postava extends HernyObjekt {
 
     protected String getOrientacia() {
         return orientacia.toString();
+    }
+
+    public void uberHp(int kolko) {
+        this.hpBar.uberHp(kolko);
+        if (this.hpBar.getHp() <= 0) {
+            this.hpBar.skry();
+            this.skry();
+        }
+    }
+
+    public boolean jeZivy() {
+        return this.hpBar.getHp() > 0;
     }
 }

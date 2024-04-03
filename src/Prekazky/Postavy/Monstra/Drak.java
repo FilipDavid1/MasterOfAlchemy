@@ -8,12 +8,13 @@ public class Drak extends Postava {
     }
 
     @Override
-    protected void krok(String nazov) {
-
+    public void utok(Postava postava) {
+        postava.uberHp(10);
     }
 
-    @Override
-    protected void idleAnimacia(String imgNazov) {
-
+    public void tik() {
+        super.idleAnimacia(super.getCestaKObrazku() + "Attack/Attack_");
     }
+
+
 }

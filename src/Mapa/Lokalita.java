@@ -1,7 +1,9 @@
 package Mapa;
 
-import Prekazky.HernyObjekt;
+import Prekazky.*;
+import Prekazky.Postavy.Postava;
 
+import java.security.PrivateKey;
 import java.util.ArrayList;
 
 public class Lokalita {
@@ -35,6 +37,7 @@ public class Lokalita {
         this.prekazky.add(prekazka);
         prekazka.setX(prekazka.getX() + this.x);
         prekazka.setY(prekazka.getY() + this.y);
+        System.out.println(prekazka.getX() + " " + prekazka.getY());
     }
 
     public void pridajQuest(Quest quest) {
@@ -78,4 +81,21 @@ public class Lokalita {
         }
     }
 
+    private void vymazMrtvePrekazky() {
+        ArrayList<HernyObjekt> mrtvePrekazky = new ArrayList<>();
+        for (HernyObjekt prekazka : this.prekazky) {
+            if (prekazka instanceof Postava postava) {
+                if (!postava.jeZivy()) {
+                    mrtvePrekazky.add(prekazka);
+                }
+            }
+        }
+
+        this.prekazky.removeAll(mrtvePrekazky);
+    }
+
+    public ArrayList<HernyObjekt> getPrekazky() {
+        this.vymazMrtvePrekazky();
+        return this.prekazky;
+    }
 }

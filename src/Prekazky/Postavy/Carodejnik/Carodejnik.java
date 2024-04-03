@@ -1,6 +1,9 @@
 package Prekazky.Postavy.Carodejnik;
 
 import Mapa.Mapa;
+import Mapa.Lokalita;
+import Prekazky.Postavy.Monstra.Drak;
+import Prekazky.HernyObjekt;
 import Prekazky.Postavy.OrientaciaPostavy;
 import Prekazky.Postavy.Postava;
 import Veci.Ingrediencie.Ingrediencia;
@@ -24,7 +27,6 @@ public class Carodejnik extends Postava {
         this.inventar = new Inventar();
     }
 
-    //nefunguje treba opravit
     public void chodDole() {
         if (this.mapa.getY() == -1850 || super.getY() != 450) {
             super.posunNa(super.getX(), super.getY() + 10);
@@ -103,23 +105,8 @@ public class Carodejnik extends Postava {
         }
     }
 
-    @Override
-    public void krok(String imgName) {
-        animacia++;
-        if (animacia >= super.getPocetObrazkov()) {
-            animacia = 0;
-        }
-        obrazok.zmenObrazok(super.getCestaKObrazku() + "Walk/" + imgName + animacia + ".png");
-    }
 
-    @Override
-    public void idleAnimacia(String imgNazov) {
-        animacia++;
-        if (animacia >= super.getPocetObrazkov()) {
-            animacia = 0;
-        }
-        obrazok.zmenObrazok(  imgNazov + animacia + ".png");
-    }
+
 
     public boolean vyrobElixir(Ingrediencia[] potrebneIngrediencie) {
         for (Ingrediencia i : potrebneIngrediencie) {
@@ -136,5 +123,39 @@ public class Carodejnik extends Postava {
 
     public void pridajVecDoInventara(Vec vec) {
         this.inventar.pridajVec(vec);
+    }
+
+    @Override
+    public void utok(Postava postava) {
+        postava.uberHp(10);
+    }
+
+    public void utocNaMonstra() {
+        // nájdite najbližšie monštrum v aktuálnej lokalite a zaútočte na neho
+        Drak najblizsieMonstrum = najdiNajblizsieMonstrum();
+        if (najblizsieMonstrum != null) {
+            utok(najblizsieMonstrum);
+        }
+    }
+
+    private Drak najdiNajblizsieMonstrum() {
+        // vráti najbližšie monštrum v aktuálnej lokalite
+        Lokalita aktualnaLokalita = mapa.getAktualnaLokalita();
+        Drak najblizsieMonstrum = null;
+        double najkratsiaVzdialenost = Double.MAX_VALUE;
+
+        for (HernyObjekt objekt : aktualnaLokalita.getPrekazky()) {
+            if (objekt instanceof Drak) {
+                Drak drak = (Drak) objekt;
+                double vzdialenost = Math.sqrt(Math.pow(super.getX() - drak.getX(), 2) + Math.pow(super.getY() - drak.getY(), 2));
+
+                if (vzdialenost < najkratsiaVzdialenost) {
+                    najblizsieMonstrum = drak;
+                    najkratsiaVzdialenost = vzdialenost;
+                }
+            }
+        }
+
+        return najblizsieMonstrum;
     }
 }

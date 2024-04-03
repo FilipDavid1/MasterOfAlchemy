@@ -36,9 +36,12 @@ public class Mapa {
             int y = (i / 3) * 900;
             this.lokality[i] = new Lokalita("Lokalita " + (i + 1), "popis", x, y);
         }
-        HernyObjekt prekazka = new Drak(7, "/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Prekazky/Postavy/Monstra/Obrazky/idle_", 700, 800);
-        HernyObjekt prekazka1 = new Drak(7, "/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Prekazky/Postavy/Monstra/Obrazky/idle_", 1000, 800);
-        HernyObjekt prekazka2 = new Drak(7, "/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Prekazky/Postavy/Monstra/Obrazky/idle_", 1200, 400);
+        HernyObjekt prekazka = new Drak(7, "/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src" +
+                "/Prekazky/Postavy/Monstra/Obrazky/Drak/Idle/Idle_", 700, 800);
+        HernyObjekt prekazka1 = new Drak(7, "/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Prekazky/Posta" +
+                "vy/Monstra/Obrazky/Drak/Idle/Idle_", 1000, 800);
+        HernyObjekt prekazka2 = new Drak(7, "/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Preka" +
+                "zky/Postavy/Monstra/Obrazky/Drak/Idle/Idle_", 1200, 400);
         this.lokality[0].pridajPrekazku(prekazka);
         this.lokality[0].pridajPrekazku(prekazka1);
         this.lokality[0].pridajPrekazku(prekazka2);
@@ -113,5 +116,7 @@ public class Mapa {
     }
 
 
-
+    public Lokalita getAktualnaLokalita() {
+        return this.aktualnaLokalita;
+    }
 }
