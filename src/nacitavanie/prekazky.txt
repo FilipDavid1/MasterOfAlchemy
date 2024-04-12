@@ -1,0 +1,17 @@
+typ: prekazka
+pocetObrazkov: 1
+cestaKObrazku: /Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Mapa/Obrazky/Grass
+x: 100
+y: 200
+
+typ: NPC
+pocetObrazkov: 1
+cestaKObrazku: obrazky/obchodnik
+x: 300
+y: 400
+
+typ: monstrum
+pocetObrazkov: 1
+cestaKObrazku: obrazky/drak
+x: 500
+y: 600

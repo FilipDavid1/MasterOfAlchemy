@@ -2,7 +2,7 @@ package Prekazky;
 
 import fri.shapesge.Obrazok;
 
-public abstract class HernyObjekt {
+public class HernyObjekt {
     private int pocetObrazkov;
     private String cestaKObrazku;
     private int x;
