@@ -1,17 +1,27 @@
-typ: prekazka
-pocetObrazkov: 1
-cestaKObrazku: /Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Mapa/Obrazky/Grass
-x: 100
-y: 200
-
-typ: NPC
-pocetObrazkov: 1
-cestaKObrazku: obrazky/obchodnik
-x: 300
+typ: monstrum
+meno: Drak
+pocetObrazkov: 5
+cestaKObrazku: /Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Prekazky/Postavy/Monstra/Obrazky/Drak/Attack/Attack_
+x: 505
 y: 400
 
 typ: monstrum
-pocetObrazkov: 1
-cestaKObrazku: obrazky/drak
+meno: Drak
+pocetObrazkov: 5
+cestaKObrazku: /Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Prekazky/Postavy/Monstra/Obrazky/Drak/Attack/Attack_
+x: 50
+y: 60
+
+typ: monstrum
+meno: Drak
+pocetObrazkov: 5
+cestaKObrazku: /Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Prekazky/Postavy/Monstra/Obrazky/Drak/Attack/Attack_
 x: 500
-y: 600
+y: 60
+
+typ: monstrum
+meno: Drak
+pocetObrazkov: 5
+cestaKObrazku: /Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Prekazky/Postavy/Monstra/Obrazky/Drak/Attack/Attack_
+x: 70
+y: 300

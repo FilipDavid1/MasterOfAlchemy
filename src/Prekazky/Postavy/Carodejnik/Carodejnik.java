@@ -1,13 +1,13 @@
 package Prekazky.Postavy.Carodejnik;
 
 import Mapa.Mapa;
-import Mapa.Lokalita;
 import Prekazky.Postavy.Monstra.Drak;
 import Prekazky.HernyObjekt;
 import Prekazky.Postavy.OrientaciaPostavy;
 import Prekazky.Postavy.Postava;
 import Veci.Ingrediencie.Ingrediencia;
 import Veci.Vec;
+import fri.shapesge.DataObrazku;
 import fri.shapesge.Kruh;
 import fri.shapesge.Obrazok;
 
@@ -17,6 +17,7 @@ public class Carodejnik extends Postava {
     private final Kruh kruh;
 
     private Inventar inventar;
+    private DataObrazku data;
     public Carodejnik(int pocetObrazkov, String nazov, int x, int y, Mapa mapa) {
         super(pocetObrazkov, nazov, x, y);
         this.mapa = mapa;
@@ -25,6 +26,7 @@ public class Carodejnik extends Postava {
         this.kruh = new Kruh();
         this.kruh.zmenPriemer(5);
         this.inventar = new Inventar();
+        data = new DataObrazku("/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Carodejnik_obrazky/Walk/Walk_East_0.png");
     }
 
     public void chodDole() {
@@ -100,6 +102,7 @@ public class Carodejnik extends Postava {
         super.setHybeSa(true);
     }
     public void tik() {
+
         if (!super.getHybeSa()) {
             this.idleAnimacia(  super.getCestaKObrazku() + "Idle/Idle_" + super.getOrientacia() + "_");
         }
@@ -140,11 +143,10 @@ public class Carodejnik extends Postava {
 
     private Drak najdiNajblizsieMonstrum() {
         // vráti najbližšie monštrum v aktuálnej lokalite
-        Lokalita aktualnaLokalita = mapa.getAktualnaLokalita();
         Drak najblizsieMonstrum = null;
         double najkratsiaVzdialenost = Double.MAX_VALUE;
-
-        for (HernyObjekt objekt : aktualnaLokalita.getPrekazky()) {
+        this.mapa.vymazMrtvePrekazky();
+        for (HernyObjekt objekt : mapa.getPrekazky()) {
             if (objekt instanceof Drak) {
                 Drak drak = (Drak) objekt;
                 double vzdialenost = Math.sqrt(Math.pow(super.getX() - drak.getX(), 2) + Math.pow(super.getY() - drak.getY(), 2));

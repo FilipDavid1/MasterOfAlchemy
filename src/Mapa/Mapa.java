@@ -1,51 +1,49 @@
 package Mapa;
 
 import Prekazky.HernyObjekt;
+import Prekazky.Postavy.Carodejnik.Carodejnik;
 import Prekazky.Postavy.Monstra.Drak;
+import Prekazky.Postavy.Postava;
+import fri.shapesge.DataObrazku;
 import fri.shapesge.Obrazok;
+import nacitavanie.NacitavaniePrekazok;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class Mapa {
     private int[][] mapa;
     private Obrazok mapaObr;
+
+    private DataObrazku data;
     private int x;
     private int y;
 
     private double miniX;
     private double miniY;
 
-    private Lokalita[] lokality;
+    private ArrayList<HernyObjekt> prekazky;
+    private ArrayList<Quest> questy;
 
-    public static final int SIRKA = 4350;
-    public static final int VYSKA = 2700;
-
-    private Lokalita aktualnaLokalita;
 
     public Mapa(int sirka, int vyska) {
 
-        this.mapa = new int[sirka][vyska];
         this.mapaObr = new Obrazok("/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Mapa/Obrazky/map.png");
+        this.data = new DataObrazku("/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Mapa/Obrazky/map.png");
+        this.mapa = new int[data.getSirka()][data.getVyska()];
         this.mapaObr.zmenPolohu(0, 0);
         this.mapaObr.zobraz();
         this.x = 0;
         this.y = 0;
         this.miniX = Math.abs(this.x)/2;
         this.miniY = Math.abs(this.y)/2;
-        this.lokality = new Lokalita[9];
-        for (int i = 0; i < 9; i++) {
-            int x = (i % 3) * 1450;
-            int y = (i / 3) * 900;
-            this.lokality[i] = new Lokalita("Lokalita " + (i + 1), "popis", x, y);
-        }
-        HernyObjekt prekazka = new Drak(7, "/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src" +
-                "/Prekazky/Postavy/Monstra/Obrazky/Drak/Idle/Idle_", 700, 800);
-        HernyObjekt prekazka1 = new Drak(7, "/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Prekazky/Posta" +
-                "vy/Monstra/Obrazky/Drak/Idle/Idle_", 1000, 800);
-        HernyObjekt prekazka2 = new Drak(7, "/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Preka" +
-                "zky/Postavy/Monstra/Obrazky/Drak/Idle/Idle_", 1200, 400);
-        this.lokality[0].pridajPrekazku(prekazka);
-        this.lokality[0].pridajPrekazku(prekazka1);
-        this.lokality[0].pridajPrekazku(prekazka2);
-        this.nastavAktualnuLokalitu();
+        this.prekazky = new ArrayList<>();
+        this.questy = new ArrayList<>();
+
+
+
     }
 
     public void nastavPolohu(String strana){
@@ -78,8 +76,7 @@ public class Mapa {
             }
         }
 
-        this.lokality[0].setPoloha( this.x - xBefore , this.y - yBefore);
-        this.nastavAktualnuLokalitu();
+        this.posunHerneObjekty( this.x - xBefore , this.y - yBefore);
     }
 
     public int getX() {
@@ -91,32 +88,60 @@ public class Mapa {
     }
 
     public int getMiniX() {
-        return (int) (Math.abs(this.x) / (double) SIRKA * Lokalita.SIRKA_LOKALITY);
+        return (int) (Math.abs(this.x) / (double) data.getSirka() );
     }
 
     public int getMiniY() {
-        return (int) (Math.abs(this.y) / (double) VYSKA * Lokalita.VYSKA_LOKALITY);
+        return (int) (Math.abs(this.y) / (double) data.getVyska());
     }
 
 
+    public void pridajPrekazku(HernyObjekt prekazka) {
+        //set x and y of the object + x and y of the location
+        this.prekazky.add(prekazka);
+        prekazka.setX(prekazka.getX() + this.x);
+        prekazka.setY(prekazka.getY() + this.y);
+        System.out.println(prekazka.getX() + " " + prekazka.getY());
+    }
 
-
-
-    private void nastavAktualnuLokalitu() {
-        for (int i = 0; i < this.lokality.length; i++) {
-            if (this.lokality[i] != null) {
-                if (Math.abs(this.x) + Lokalita.SIRKA_LOKALITY / 2 >= lokality[i].getX() && Math.abs(this.x) + Lokalita.SIRKA_LOKALITY / 2 < lokality[i].getX() + Lokalita.SIRKA_LOKALITY &&
-                        Math.abs(this.y) + Lokalita.VYSKA_LOKALITY / 2 >= lokality[i].getY() && Math.abs(this.y) + Lokalita.VYSKA_LOKALITY / 2 < lokality[i].getY() + Lokalita.VYSKA_LOKALITY) {
-                    this.aktualnaLokalita = this.lokality[i];
-                    System.out.println("Aktualna lokalita: " + this.aktualnaLokalita.getNazov());
-                    break;
-                }
-            }
+    public void pridajPrekazky(List<HernyObjekt> prekazky) {
+        for (HernyObjekt prekazka : prekazky) {
+            this.pridajPrekazku(prekazka);
+            System.out.println(prekazka.getX() + " " + prekazka.getY());
         }
     }
 
+    public void pridajQuest(Quest quest) {
+        this.questy.add(quest);
+    }
 
-    public Lokalita getAktualnaLokalita() {
-        return this.aktualnaLokalita;
+    public void posunHerneObjekty(int x, int y) {
+        for (HernyObjekt hernyObjekt : this.prekazky) {
+            if (hernyObjekt instanceof Postava) {
+                Postava drak = (Postava) hernyObjekt;
+                drak.posunNa(drak.getX() + x, drak.getY() + y);
+            } else {
+                hernyObjekt.setX(hernyObjekt.getX() + x);
+                hernyObjekt.setY(hernyObjekt.getY() + y);
+            }
+
+        }
+    }
+
+    public void vymazMrtvePrekazky() {
+        ArrayList<HernyObjekt> mrtvePrekazky = new ArrayList<>();
+        for (HernyObjekt prekazka : this.prekazky) {
+            if (prekazka instanceof Postava postava) {
+                if (!postava.jeZivy()) {
+                    mrtvePrekazky.add(prekazka);
+                }
+            }
+        }
+
+        this.prekazky.removeAll(mrtvePrekazky);
+    }
+
+    public ArrayList<HernyObjekt> getPrekazky() {
+        return this.prekazky;
     }
 }
