@@ -28,7 +28,7 @@ public class Mapa {
     private ArrayList<Quest> questy;
 
 
-    public Mapa(int sirka, int vyska) {
+    public Mapa() {
 
         this.mapaObr = new Obrazok("/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Mapa/Obrazky/map.png");
         this.data = new DataObrazku("/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Mapa/Obrazky/map.png");

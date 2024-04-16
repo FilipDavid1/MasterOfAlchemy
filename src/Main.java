@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Mapa mapa = new Mapa(4350, 2700);
+        Mapa mapa = new Mapa();
         NacitavaniePrekazok nacitavaniePrekazok = new NacitavaniePrekazok(mapa);
 
 //        HernyObjekt prekazka = new Drak(6, "/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Prekazky/Postavy/Monstra/Obrazky/Drak/", 600, 100);
