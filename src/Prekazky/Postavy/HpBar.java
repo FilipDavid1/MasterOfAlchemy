@@ -7,6 +7,9 @@ public class HpBar {
     private Obdlznik vonkajsi;
     private Obdlznik vnutorny;
 
+    private int x;
+    private int y;
+
     public HpBar(int x, int y) {
         this.hp = 100;
         this.vonkajsi = new Obdlznik(x, y);
@@ -16,6 +19,8 @@ public class HpBar {
         this.vnutorny.zmenStrany(100, 8);
         this.vnutorny.zmenFarbu("green");
         this.zobraz();
+        this.x = x;
+        this.y = y;
     }
 
     public void uberHp(int kolko) {
@@ -27,6 +32,8 @@ public class HpBar {
     }
 
     public void posunNa(int x, int y) {
+        this.x = x;
+        this.y = y;
         vonkajsi.zmenPolohu(x, y);
         vnutorny.zmenPolohu(x + 2, y + 2);
         this.zobraz();
@@ -45,5 +52,13 @@ public class HpBar {
 
     public int getHp() {
         return hp;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }

@@ -11,8 +11,8 @@ public class DraciaSupina implements Ingrediencia {
     private Obrazok obrazok;
 
     public DraciaSupina(int x, int y, String obrazok) {
-        this.x = Mapa.SIRKA - x;
-        this.y = Mapa.VYSKA - y;
+        this.x = x;
+        this.y = y;
         this.obrazok = new Obrazok(obrazok);
         //umiestnenie obrazku na dane suradnice na mape
         this.obrazok.zmenPolohu(x, y);

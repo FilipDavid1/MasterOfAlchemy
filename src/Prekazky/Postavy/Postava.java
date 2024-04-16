@@ -43,15 +43,14 @@ public abstract class Postava extends HernyObjekt {
         obrazok.zmenObrazok(  imgNazov + animacia + ".png");
     }
 
-    protected void posunNa(int x, int y) {
-        obrazok.zmenPolohu(x, y);
-        super.setX(x);
-        super.setY(y);
-        this.obrazok.zobraz();
+    public void posunNa(int x, int y) {
+        super.setX(x, obrazok, hpBar);
+        super.setY(y, obrazok, hpBar);
     }
 
     public void skry() {
         obrazok.skry();
+        this.hpBar.skry();
     }
 
     public void setHybeSa(boolean hybeSa) {
@@ -80,5 +79,9 @@ public abstract class Postava extends HernyObjekt {
 
     public boolean jeZivy() {
         return this.hpBar.getHp() > 0;
+    }
+
+    public Obrazok getObrazok() {
+        return obrazok;
     }
 }
