@@ -18,6 +18,7 @@ public class Carodejnik extends Postava {
 
     private Inventar inventar;
     private DataObrazku data;
+    private float speed = 0.7f;
     public Carodejnik(int pocetObrazkov, String nazov, int x, int y, Mapa mapa) {
         super(pocetObrazkov, nazov, x, y);
         this.mapa = mapa;
@@ -30,53 +31,63 @@ public class Carodejnik extends Postava {
     }
 
     public void chodDole() {
+        float targetY = super.getY() + 10; // Cieľová pozícia.
+        float newY = lerp(super.getY(), targetY, speed); // Vypočíta novú pozíciu.
         if (this.mapa.getY() == -1850 || super.getY() != 450) {
-            super.posunNa(super.getX(), super.getY() + 10);
+            super.posunNa(super.getX(), (int)newY);
         }
         this.krok("Walk_South_");
         super.setOrientacia(OrientaciaPostavy.SOUTH);
         this.hybeSa();
         if (super.getY() == 450) {
-            this.mapa.nastavPolohu("dole");
+            this.mapa.nastavPolohu("dole", speed);
         }
     }
 
     public void chodHore() {
+        float targetY = super.getY() - 10; // Cieľová pozícia.
+        float newY = lerp(super.getY(), targetY, speed); // Vypočít
         if (this.mapa.getY() == 0 || super.getY() != 450) {
-            super.posunNa(super.getX(), super.getY() - 10);
+            super.posunNa(super.getX(), (int)newY);
         }
         this.krok("Walk_North_");
         super.setOrientacia(OrientaciaPostavy.NORTH);
         this.hybeSa();
         if (super.getY() == 450) {
-            this.mapa.nastavPolohu("hore");
+            this.mapa.nastavPolohu("hore", speed);
         }
     }
 
     public void chodVlavo() {
+        float targetX = super.getX() - 10; // Cieľová pozícia.
+        float newX = lerp(super.getX(), targetX, speed); // Vypočít
         if (this.mapa.getX() == 0 || super.getX() != 725) {
-            super.posunNa(super.getX() - 10, super.getY());
+            super.posunNa((int)newX, super.getY());
 
         }
         this.krok("Walk_West_");
         super.setOrientacia(OrientaciaPostavy.WEST);
         this.hybeSa();
         if (super.getX() == 725){
-            this.mapa.nastavPolohu("vlavo");
+            this.mapa.nastavPolohu("vlavo", speed);
         }
     }
 
     public void chodVpravo() {
+        float targetX = super.getX() + 10; // Cieľová pozícia.
+        float newX = lerp(super.getX(), targetX, speed); // Vypočít
         if (this.mapa.getX() == -2910 || super.getX() != 725) {
-            super.posunNa(super.getX() + 10, super.getY());
+            super.posunNa((int)newX, super.getY());
         }
         this.krok("Walk_East_");
         super.setOrientacia(OrientaciaPostavy.EAST);
         this.hybeSa();
         if (super.getX() == 725) {
-            this.mapa.nastavPolohu("vpravo");
+            this.mapa.nastavPolohu("vpravo", speed);
         }
     }
+
+
 
     public void ukazMiniMapu() {
         this.miniMapa.zobraz();
@@ -159,5 +170,9 @@ public class Carodejnik extends Postava {
         }
 
         return najblizsieMonstrum;
+    }
+
+    private float lerp(float start, float end, float speed) {
+        return start + speed * (end - start);
     }
 }

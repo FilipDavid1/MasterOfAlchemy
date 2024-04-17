@@ -46,38 +46,48 @@ public class Mapa {
 
     }
 
-    public void nastavPolohu(String strana){
+    public void nastavPolohu(String strana, float speed){
         int xBefore = this.x;
         int yBefore = this.y;
 
-        if (strana.equals("dole")) {
-            if (this.y != -1850){
-                this.mapaObr.zmenPolohu(this.x, this.y -10);
-                this.y-=10;
-                this.miniY +=3.5;
-            }
-        } else if (strana.equals("hore")) {
-            if (this.y != 0){
-                this.mapaObr.zmenPolohu(this.x, this.y +10);
-                this.y+=10;
-                this.miniY -=3.5;
-            }
-        } else if (strana.equals("vpravo")) {
-            if (this.x != -2910) {
-                this.mapaObr.zmenPolohu(this.x - 10, this.y);
-                this.x -= 10;
-                this.miniX +=3.5;
-            }
-        } else {
-            if (this.x != 0) {
-                this.mapaObr.zmenPolohu(this.x + 10, this.y);
-                this.x += 10;
-                this.miniX -=3.5;
-            }
+        float targetX = this.x;
+        float targetY = this.y;
+
+        if (strana.equals("dole") && this.y != -1850) {
+            targetY = this.y - 10;
+        } else if (strana.equals("hore") && this.y != 0) {
+            targetY = this.y + 10;
+        } else if (strana.equals("vpravo") && this.x != -2910) {
+            targetX = this.x - 10;
+        } else if (this.x != 0) {
+            targetX = this.x + 10;
+        } else if (strana.equals("dolevpravo") && this.y != -1850 && this.x != -2910) {
+            targetY = this.y - 1;
+            targetX = this.x - 1;
+        } else if (strana.equals("dolevlavo") && this.y != -1850 && this.x != 0) {
+            targetY = this.y - 1;
+            targetX = this.x + 1;
+        } else if (strana.equals("horevpravo") && this.y != 0 && this.x != -2910) {
+            targetY = this.y + 1;
+            targetX = this.x - 1;
+        } else if (strana.equals("horevlavo") && this.y != 0 && this.x != 0) {
+            targetY = this.y + 1;
+            targetX = this.x + 1;
         }
+
+        float newX = lerp(this.x, targetX, speed);
+        float newY = lerp(this.y, targetY, speed);
+
+        this.mapaObr.zmenPolohu((int)newX, (int)newY);
+        this.x = (int)newX;
+        this.y = (int)newY;
+        this.miniX += (newX - xBefore) * 0.35;
+        this.miniY += (newY - yBefore) * 0.35;
 
         this.posunHerneObjekty( this.x - xBefore , this.y - yBefore);
     }
+
+
 
     public int getX() {
         return x;
@@ -144,4 +154,8 @@ public class Mapa {
     public ArrayList<HernyObjekt> getPrekazky() {
         return this.prekazky;
     }
+    public float lerp(float start, float end, float speed) {
+        return (1 - speed) * start + speed * end;
+    }
+
 }
