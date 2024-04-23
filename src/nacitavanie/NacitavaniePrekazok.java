@@ -2,6 +2,7 @@ package nacitavanie;
 
 import Mapa.Mapa;
 import Prekazky.HernyObjekt;
+import fri.shapesge.Manazer;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,7 +15,7 @@ import java.util.Map;
 
 public class NacitavaniePrekazok {
 
-    public NacitavaniePrekazok(Mapa mapa) {
+    public NacitavaniePrekazok(Mapa mapa, Manazer manazer) {
         List<Map<String, String>> prekazkyData = null;
         try {
             prekazkyData = this.nacitajPrekazky("/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/nacitavanie/prekazky.txt");
@@ -37,6 +38,7 @@ public class NacitavaniePrekazok {
                 if (prekazka != null) {
                     System.out.println("Pridavam prekazku: " + prekazka);
                     mapa.pridajPrekazku(prekazka);
+                    manazer.spravujObjekt(prekazka);
                 }
             }
         }

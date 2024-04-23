@@ -1,30 +1,23 @@
 import Mapa.Mapa;
-import Prekazky.HernyObjekt;
-import Prekazky.Postavy.Carodejnik.Carodejnik;
+import Prekazky.Postavy.Hrac.Hrac;
 
-import Prekazky.Postavy.Monstra.Drak;
-import Prekazky.Postavy.Postava;
 import fri.shapesge.Manazer;
 import nacitavanie.NacitavaniePrekazok;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 public class Main {
     public static void main(String[] args) {
+        Manazer manazer = new Manazer();
         Mapa mapa = new Mapa();
-        NacitavaniePrekazok nacitavaniePrekazok = new NacitavaniePrekazok(mapa);
+        NacitavaniePrekazok nacitavaniePrekazok = new NacitavaniePrekazok(mapa, manazer);
 
 //        HernyObjekt prekazka = new Drak(6, "/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Prekazky/Postavy/Monstra/Obrazky/Drak/", 600, 100);
 
-        Manazer manazer = new Manazer();
+
 
 //        manazer.spravujObjekt(prekazka);
 
 
-        Carodejnik carodejnik = new Carodejnik(4, "/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Carodejnik_obrazky/", 725, 450, mapa);
-        manazer.spravujObjekt(carodejnik);
+        Hrac hrac = new Hrac(4, 8, "resources/Obrazky/Hrac/Idle/Idle_South_0", 725, 450, mapa);
+        manazer.spravujObjekt(hrac);
     }
 }
