@@ -34,8 +34,8 @@ public class HpBar {
     public void posunNa(int x, int y) {
         this.x = x;
         this.y = y;
-        vonkajsi.zmenPolohu(x, y);
-        vnutorny.zmenPolohu(x + 2, y + 2);
+        vonkajsi.zmenPolohu(x - 17, y - 10);
+        vnutorny.zmenPolohu(x - 15, y - 8);
         this.zobraz();
     }
 
