@@ -1,6 +1,8 @@
 import Mapa.Mapa;
 import Prekazky.Postavy.Hrac.Hrac;
 
+import Veci.Ingrediencie.Ingrediencia;
+import Veci.Ingrediencie.Ingrediencie;
 import fri.shapesge.Manazer;
 import nacitavanie.NacitavaniePrekazok;
 
@@ -17,7 +19,8 @@ public class Main {
 //        manazer.spravujObjekt(prekazka);
 
 
-        Hrac hrac = new Hrac(4, 8, "resources/Obrazky/Hrac/Idle/Idle_South_0", 725, 450, mapa);
+        Hrac hrac = new Hrac(4, 8, "resources/Obrazky/Hrac/Idle/Idle_Down_0", 725, 450, mapa);
         manazer.spravujObjekt(hrac);
+
     }
 }

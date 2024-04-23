@@ -3,6 +3,7 @@ package Mapa;
 import Prekazky.HernyObjekt;
 import Prekazky.Postavy.Postava;
 import Veci.Ingrediencie.Ingrediencia;
+import Veci.Ingrediencie.Ingrediencie;
 import Veci.Ingrediencie.Tekvica;
 import fri.shapesge.DataObrazku;
 import fri.shapesge.Obrazok;
@@ -139,9 +140,8 @@ public class Mapa {
             if (prekazka instanceof Postava postava) {
                 if (!postava.jeZivy()) {
                     mrtvePrekazky.add(prekazka);
-                    //vyhod ingredienciu tekvica
-                        Tekvica ingrediencia = new Tekvica(postava.getX(), postava.getY());
-                        this.ingrediencie.add(ingrediencia);
+                    Ingrediencia ingrediencia = Ingrediencie.getRandomIngredienciu(postava.getX(), postava.getY());
+                    this.ingrediencie.add(ingrediencia);
                 }
             }
         }

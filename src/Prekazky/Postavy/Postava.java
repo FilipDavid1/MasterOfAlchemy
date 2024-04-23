@@ -14,7 +14,7 @@ public abstract class Postava extends HernyObjekt {
 
     public Postava(int pocetObrazkov, String cestaKObrazku, int x, int y) {
         super(pocetObrazkov, cestaKObrazku, x, y);
-        this.orientacia = OrientaciaPostavy.SOUTH;
+        this.orientacia = OrientaciaPostavy.DOWN;
         this.hpBar = new HpBar(x-20, y - 10);
     }
 
@@ -32,7 +32,7 @@ public abstract class Postava extends HernyObjekt {
         if (animacia >= super.getPocetObrazkov()) {
             animacia = 0;
         }
-        obrazok.zmenObrazok(super.getCestaKObrazku().replace("Idle/Idle_South_0", "") + "Walk/" + imgName + animacia + ".png");
+        obrazok.zmenObrazok(super.getCestaKObrazku().replace("Idle/Idle_Down_0", "") + "Walk/" + imgName + animacia + ".png");
     }
 
     public void idleAnimacia(String imgNazov){

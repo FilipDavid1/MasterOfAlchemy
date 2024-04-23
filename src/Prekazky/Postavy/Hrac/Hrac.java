@@ -29,8 +29,8 @@ public class Hrac extends Postava {
         if (this.mapa.getY() == -1850 || super.getY() != 450) {
             super.posunNa(super.getX(), (int)newY);
         }
-        this.krok("Walk_South_");
-        super.setOrientacia(OrientaciaPostavy.SOUTH);
+        this.krok("Walk_Down_");
+        super.setOrientacia(OrientaciaPostavy.DOWN);
         this.hybeSa();
         if (super.getY() == 450) {
             this.mapa.nastavPolohu("dole", speed);
@@ -43,8 +43,8 @@ public class Hrac extends Postava {
         if (this.mapa.getY() == 0 || super.getY() != 450) {
             super.posunNa(super.getX(), (int)newY);
         }
-        this.krok("Walk_North_");
-        super.setOrientacia(OrientaciaPostavy.NORTH);
+        this.krok("Walk_Up_");
+        super.setOrientacia(OrientaciaPostavy.UP);
         this.hybeSa();
         if (super.getY() == 450) {
             this.mapa.nastavPolohu("hore", speed);
@@ -58,8 +58,8 @@ public class Hrac extends Postava {
             super.posunNa((int)newX, super.getY());
 
         }
-        this.krok("Walk_West_");
-        super.setOrientacia(OrientaciaPostavy.WEST);
+        this.krok("Walk_Left_");
+        super.setOrientacia(OrientaciaPostavy.LEFT);
         this.hybeSa();
         if (super.getX() == 725){
             this.mapa.nastavPolohu("vlavo", speed);
@@ -72,8 +72,8 @@ public class Hrac extends Postava {
         if (this.mapa.getX() == -2910 || super.getX() != 725) {
             super.posunNa((int)newX, super.getY());
         }
-        this.krok("Walk_East_");
-        super.setOrientacia(OrientaciaPostavy.EAST);
+        this.krok("Walk_Right_");
+        super.setOrientacia(OrientaciaPostavy.RIGHT);
         this.hybeSa();
         if (super.getX() == 725) {
             this.mapa.nastavPolohu("vpravo", speed);
@@ -96,7 +96,7 @@ public class Hrac extends Postava {
 
     public void tik() {
         if (!super.getHybeSa()) {
-            this.idleAnimacia(  super.getCestaKObrazku().replace("South_0", "") + super.getOrientacia() + "_");
+            this.idleAnimacia(  super.getCestaKObrazku().replace("Down_0", "") + super.getOrientacia() + "_");
         }
     }
 
@@ -185,9 +185,9 @@ public class Hrac extends Postava {
     @Override
     public void utok(Postava postava) {
         //attack animation
-        postava.uberHp(100);
+        postava.uberHp(10);
 
-        this.attackAnimacia(super.getCestaKObrazku().replace("/Idle/Idle_South_0", "/Attack/Attack_Up_"), 6 );
+        this.attackAnimacia(super.getCestaKObrazku().replace("/Idle/Idle_Down_0", "/Attack/Attack_") + super.getOrientacia() + "_", 6 );
     }
 
     //zober ingredienciu z mapy ak je hrac od nej max 50px

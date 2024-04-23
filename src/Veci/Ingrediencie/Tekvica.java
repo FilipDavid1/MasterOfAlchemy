@@ -6,7 +6,7 @@ public class Tekvica extends Ingrediencia {
 
 
     public Tekvica(int x, int y) {
-        super("resources/Obrazky/Ingrediencie/Black.png", x, y);
+        super("tekvica.png", x, y);
     }
 
     @Override

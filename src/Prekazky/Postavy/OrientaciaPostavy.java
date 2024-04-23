@@ -1,19 +1,19 @@
 package Prekazky.Postavy;
 
 public enum OrientaciaPostavy {
-    WEST, EAST, NORTH, SOUTH;
+    LEFT, RIGHT, UP, DOWN;
 
 
     public String toString() {
         switch (this) {
-            case WEST:
-                return "West";
-            case EAST:
-                return "East";
-            case NORTH:
-                return "North";
-            case SOUTH:
-                return "South";
+            case LEFT:
+                return "Left";
+            case RIGHT:
+                return "Right";
+            case UP:
+                return "Up";
+            case DOWN:
+                return "Down";
             default:
                 return "Neznama orientacia";
         }

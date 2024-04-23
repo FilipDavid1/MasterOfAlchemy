@@ -4,13 +4,13 @@ import Prekazky.HernaEntita;
 import Veci.Vec;
 import fri.shapesge.Obrazok;
 
-public class Ingrediencia extends HernaEntita implements Vec  {
+public abstract class Ingrediencia extends HernaEntita implements Vec {
 
     private Obrazok obrazok;
     private int x;
     private int y;
     public Ingrediencia(String obrazok, int x, int y) {
-        this.obrazok = new Obrazok(obrazok);
+        this.obrazok = new Obrazok("resources/Obrazky/Ingrediencie/" + obrazok);
         this.obrazok.zmenPolohu(x, y);
         this.obrazok.zobraz();
         this.x = x;
