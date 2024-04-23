@@ -3,9 +3,10 @@ package Veci.Elixiry;
 import Prekazky.Postavy.Postava;
 import Veci.Ingrediencie.Ingrediencie;
 
-public class ElixirSily extends Elixir {
-    private static final Ingrediencie[] POTREBNE_INGREDIENCIE = {Ingrediencie.SojoveBoby, Ingrediencie.Lisohlavky, Ingrediencie.Gastany};
-    public ElixirSily(String nazov) {
+public class ElixirMoci extends Elixir {
+
+    private static final Ingrediencie[] POTREBNE_INGREDIENCIE = {Ingrediencie.Ametist, Ingrediencie.Bufotenin, Ingrediencie.Zihlava};
+    public ElixirMoci(String nazov) {
         super(nazov, POTREBNE_INGREDIENCIE);
     }
 
