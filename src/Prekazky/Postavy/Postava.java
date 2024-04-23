@@ -22,7 +22,7 @@ public abstract class Postava extends HernyObjekt {
 
     @Override
     public void nastavObrazok() {
-        this.obrazok = new Obrazok( getCestaKObrazku() + animacia + ".png");
+        this.obrazok = new Obrazok( getCestaKObrazku().replace("0", "") + animacia + ".png");
         this.obrazok.zmenPolohu(super.getX(), super.getY());
         this.obrazok.zobraz();
     }
@@ -32,7 +32,7 @@ public abstract class Postava extends HernyObjekt {
         if (animacia >= super.getPocetObrazkov()) {
             animacia = 0;
         }
-        obrazok.zmenObrazok(super.getCestaKObrazku() + "Walk/" + imgName + animacia + ".png");
+        obrazok.zmenObrazok(super.getCestaKObrazku().replace("Idle/Idle_South_0", "") + "Walk/" + imgName + animacia + ".png");
     }
 
     public void idleAnimacia(String imgNazov){
@@ -83,5 +83,13 @@ public abstract class Postava extends HernyObjekt {
 
     public Obrazok getObrazok() {
         return obrazok;
+    }
+
+    protected void attackAnimacia(String imgNazov, int i) {
+        animacia++;
+        if (animacia >= i) {
+            animacia = 0;
+        }
+        obrazok.zmenObrazok(  imgNazov + animacia + ".png");
     }
 }
