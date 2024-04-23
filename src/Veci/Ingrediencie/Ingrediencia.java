@@ -4,27 +4,25 @@ import Prekazky.HernaEntita;
 import Veci.Vec;
 import fri.shapesge.Obrazok;
 
-public abstract class Ingrediencia extends HernaEntita implements Vec {
+public class Ingrediencia extends HernaEntita implements Vec {
 
     private Obrazok obrazok;
+
+    private String nazov;
     private int x;
     private int y;
-    public Ingrediencia(String obrazok, int x, int y) {
-        this.obrazok = new Obrazok("resources/Obrazky/Ingrediencie/" + obrazok);
+    public Ingrediencia(String nazov, int x, int y) {
+        this.obrazok = new Obrazok("resources/Obrazky/Ingrediencie/" + nazov + ".png");
         this.obrazok.zmenPolohu(x, y);
         this.obrazok.zobraz();
         this.x = x;
-
+        this.nazov = nazov;
     }
     @Override
     public String getNazov() {
-        return null;
+        return this.nazov;
     }
 
-    @Override
-    public int getCena() {
-        return 0;
-    }
 
     @Override
     public Obrazok getObrazok() {

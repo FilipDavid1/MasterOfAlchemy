@@ -46,15 +46,9 @@ public enum Ingrediencie {
         return this.name();
     }
 
-    public static Ingrediencia getRandomIngredienciu(int x, int y) {
-        String nazov = Ingrediencie.values()[(int) (Math.random() * Ingrediencie.values().length)].getNazov();
-
-        //vytvor instanciu nazvu
-        try {
-            return (Ingrediencia) Class.forName("Veci.Ingrediencie." + nazov).getConstructor(int.class, int.class).newInstance(x, y);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    public static String getRandomIngredienciu() {
+        Ingrediencie[] ingrediencie = Ingrediencie.values();
+        return ingrediencie[(int) (Math.random() * (ingrediencie.length - 1))].getNazov();
     }
+
 }

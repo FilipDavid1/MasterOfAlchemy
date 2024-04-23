@@ -22,5 +22,6 @@ public class Main {
         Hrac hrac = new Hrac(4, 8, "resources/Obrazky/Hrac/Idle/Idle_Down_0", 725, 450, mapa);
         manazer.spravujObjekt(hrac);
 
+        System.out.println(Ingrediencie.getRandomIngredienciu());
     }
 }

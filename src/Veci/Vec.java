@@ -6,7 +6,5 @@ import fri.shapesge.Obrazok;
 public interface Vec {
     public String getNazov();
 
-    public int getCena();
-
     public Obrazok getObrazok();
 }

@@ -4,7 +4,6 @@ import Prekazky.HernyObjekt;
 import Prekazky.Postavy.Postava;
 import Veci.Ingrediencie.Ingrediencia;
 import Veci.Ingrediencie.Ingrediencie;
-import Veci.Ingrediencie.Tekvica;
 import fri.shapesge.DataObrazku;
 import fri.shapesge.Obrazok;
 
@@ -140,7 +139,7 @@ public class Mapa {
             if (prekazka instanceof Postava postava) {
                 if (!postava.jeZivy()) {
                     mrtvePrekazky.add(prekazka);
-                    Ingrediencia ingrediencia = Ingrediencie.getRandomIngredienciu(postava.getX(), postava.getY());
+                    Ingrediencia ingrediencia = new Ingrediencia(Ingrediencie.getRandomIngredienciu(), postava.getX(), postava.getY());
                     this.ingrediencie.add(ingrediencia);
                 }
             }
