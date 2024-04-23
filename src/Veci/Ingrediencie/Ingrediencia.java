@@ -1,7 +1,38 @@
 package Veci.Ingrediencie;
 
+import Prekazky.HernaEntita;
 import Veci.Vec;
 import fri.shapesge.Obrazok;
 
-public interface Ingrediencia extends Vec {
+public class Ingrediencia extends HernaEntita implements Vec  {
+
+    private Obrazok obrazok;
+    private int x;
+    private int y;
+    public Ingrediencia(String obrazok, int x, int y) {
+        this.obrazok = new Obrazok(obrazok);
+        this.obrazok.zmenPolohu(x, y);
+        this.obrazok.zobraz();
+        this.x = x;
+
+    }
+    @Override
+    public String getNazov() {
+        return null;
+    }
+
+    @Override
+    public int getCena() {
+        return 0;
+    }
+
+    @Override
+    public Obrazok getObrazok() {
+        return obrazok;
+    }
+
+
+    public void skry() {
+        obrazok.skry();
+    }
 }

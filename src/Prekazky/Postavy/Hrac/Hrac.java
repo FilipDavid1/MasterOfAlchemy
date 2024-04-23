@@ -1,33 +1,26 @@
-package Prekazky.Postavy.Carodejnik;
+package Prekazky.Postavy.Hrac;
 
 import Mapa.Mapa;
-import Prekazky.Postavy.Monstra.Drak;
 import Prekazky.HernyObjekt;
+import Prekazky.Postavy.Monstra.Drak;
 import Prekazky.Postavy.OrientaciaPostavy;
 import Prekazky.Postavy.Postava;
 import Veci.Ingrediencie.Ingrediencia;
 import Veci.Vec;
-import fri.shapesge.DataObrazku;
 import fri.shapesge.Kruh;
 import fri.shapesge.Obrazok;
 
-public class Carodejnik extends Postava {
+public class Hrac extends Postava {
     private final Mapa mapa;
-    private final Obrazok miniMapa;
     private final Kruh kruh;
-
     private Inventar inventar;
-    private DataObrazku data;
     private float speed = 0.7f;
-    public Carodejnik(int pocetObrazkov, String nazov, int x, int y, Mapa mapa) {
-        super(pocetObrazkov, nazov, x, y);
+
+    public Hrac(int pocetObrazkovIdle, int pocetObrazkovWalk, String nazov, int x, int y, Mapa mapa) {
+        super(pocetObrazkovIdle, nazov, x, y);
         this.mapa = mapa;
-        this.miniMapa = new Obrazok("/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Mapa/Obrazky/miniMap.png");
-        this.miniMapa.zmenPolohu(0, 0);
         this.kruh = new Kruh();
-        this.kruh.zmenPriemer(5);
         this.inventar = new Inventar();
-        data = new DataObrazku("/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/Carodejnik_obrazky/Walk/Walk_East_0.png");
     }
 
     public void chodDole() {
@@ -88,23 +81,11 @@ public class Carodejnik extends Postava {
     }
 
 
-
-    public void ukazMiniMapu() {
-        this.miniMapa.zobraz();
-        if (super.getX() == 725 && super.getY() == 450) {
-            this.kruh.zmenPolohu(this.mapa.getMiniX() + 242, this.mapa.getMiniY()+150);
-        } else {
-            this.kruh.zmenPolohu(super.getX(), super.getY());
-        }
-        this.kruh.zobraz();
-
-    }
-
     public void stop() {
         this.nehybeSa();
-        this.miniMapa.skry();
         this.kruh.skry();
     }
+
     public void nehybeSa() {
         super.setHybeSa(false);
     }
@@ -112,15 +93,12 @@ public class Carodejnik extends Postava {
     public void hybeSa() {
         super.setHybeSa(true);
     }
-    public void tik() {
 
+    public void tik() {
         if (!super.getHybeSa()) {
-            this.idleAnimacia(  super.getCestaKObrazku() + "Idle/Idle_" + super.getOrientacia() + "_");
+            this.idleAnimacia(  super.getCestaKObrazku().replace("South_0", "") + super.getOrientacia() + "_");
         }
     }
-
-
-
 
     public boolean vyrobElixir(Ingrediencia[] potrebneIngrediencie) {
         for (Ingrediencia i : potrebneIngrediencie) {
@@ -139,21 +117,26 @@ public class Carodejnik extends Postava {
         this.inventar.pridajVec(vec);
     }
 
-    @Override
-    public void utok(Postava postava) {
-        postava.uberHp(10);
-    }
+
+
 
     public void utocNaMonstra() {
-        // nájdite najbližšie monštrum v aktuálnej lokalite a zaútočte na neho
         Drak najblizsieMonstrum = najdiNajblizsieMonstrum();
         if (najblizsieMonstrum != null) {
             utok(najblizsieMonstrum);
         }
     }
 
+    public void zoberIngredienciu() {
+        try {
+            Ingrediencia najblizsiaIngrediencia = najdiIngredienciu();
+            zoberNajbIngredienciu(najblizsiaIngrediencia);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     private Drak najdiNajblizsieMonstrum() {
-        // vráti najbližšie monštrum v aktuálnej lokalite
         Drak najblizsieMonstrum = null;
         double najkratsiaVzdialenost = Double.MAX_VALUE;
         this.mapa.vymazMrtvePrekazky();
@@ -172,7 +155,46 @@ public class Carodejnik extends Postava {
         return najblizsieMonstrum;
     }
 
+    private Ingrediencia najdiIngredienciu() {
+        double minVzdialenost = Double.MAX_VALUE;
+        Ingrediencia najblizsiaIngrediencia = null;
+
+        for (Ingrediencia ingrediencia : this.mapa.getIngrediencie()) {
+            double vzdialenost = 0;
+            if (super.getX() == 725 && super.getY() == 450 ) {
+                vzdialenost = Math.sqrt(Math.pow(mapa.getX() - ingrediencia.getX(), 2) + Math.pow(mapa.getY() - ingrediencia.getY(), 2));
+            }
+            if (vzdialenost < minVzdialenost && vzdialenost <= 100) {
+                minVzdialenost = vzdialenost;
+                najblizsiaIngrediencia = ingrediencia;
+            }
+        }
+
+        if (najblizsiaIngrediencia == null) {
+            throw new RuntimeException("Žiadna ingrediencia nie je v dosahu 100px od hráča.");
+        }
+
+        return najblizsiaIngrediencia;
+    }
+
+
     private float lerp(float start, float end, float speed) {
         return start + speed * (end - start);
+    }
+
+    @Override
+    public void utok(Postava postava) {
+        //attack animation
+        postava.uberHp(100);
+
+        this.attackAnimacia(super.getCestaKObrazku().replace("/Idle/Idle_South_0", "/Attack/Attack_Up_"), 6 );
+    }
+
+    //zober ingredienciu z mapy ak je hrac od nej max 50px
+    private void zoberNajbIngredienciu(Ingrediencia ingrediencia){
+        this.inventar.pridajVec(ingrediencia);
+        this.mapa.vymazIngredienciu(ingrediencia);
+
+        inventar.getVeci();
     }
 }
