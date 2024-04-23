@@ -4,7 +4,7 @@ import Prekazky.Postavy.Postava;
 
 public class Drak extends Postava {
     public Drak(int pocetObrazkov, String cestaKObrazku, int x, int y) {
-        super(pocetObrazkov, cestaKObrazku, x, y);
+        super(pocetObrazkov, cestaKObrazku + "0", x, y);
     }
 
     @Override
@@ -13,8 +13,9 @@ public class Drak extends Postava {
     }
 
     public void tik() {
-        super.idleAnimacia(super.getCestaKObrazku() + "Attack/Attack_");
+        super.idleAnimacia(super.getCestaKObrazku().replace("0", ""));
     }
+
 
 
 }
