@@ -6,16 +6,36 @@ import Prekazky.Postavy.Hrac.Inventar;
 import Mapa.Mapa;
 import Prekazky.Postavy.Postava;
 import Veci.Ingrediencie.Ingrediencia;
+import fri.shapesge.BlokTextu;
+import fri.shapesge.StylFontu;
 
 public class Interakcia {
     private Mapa mapa;
     private Inventar inventar;
 
     private Hrac hrac;
+    private BlokTextu blokTextu;
+    private boolean jeZobrazeny;
+    private int casovac;
     public Interakcia(Mapa mapa, Inventar inventar, Hrac hrac) {
         this.mapa = mapa;
         this.inventar = inventar;
         this.hrac = hrac;
+        this.blokTextu = new BlokTextu("Nie si v dosahu na to aby si interagoval");
+        this.blokTextu.zmenFarbu("white");
+        this.blokTextu.zmenFont("Courier New", StylFontu.BOLD, 15);
+        this.casovac = 10;
+    }
+
+    public void tik() {
+        if (jeZobrazeny) {
+            casovac--;
+        }
+
+        if (casovac <= 0) {
+            this.jeZobrazeny = false;
+            this.blokTextu.skry();
+        }
     }
 
 
@@ -23,20 +43,33 @@ public class Interakcia {
         if (jeVDosahu(x, y)) {
             if (!this.zoberIngredienciu(x, y)) {
                 if (!this.rozhovorNPC(x, y)) {
-                    this.utokMonstrum(x, y);
+                    if (!this.utokMonstrum(x, y)) {
+                        this.blokTextu.zmenText("Ziadny objekt na interakciu");
+                        this.blokTextu.zmenPolohu(0, 30);
+                        this.blokTextu.zobraz();
+                        this.jeZobrazeny = true;
+                        this.casovac = 10;
+                    }
                 }
             }
+        } else {
+            this.blokTextu.zmenPolohu(0, 30);
+            this.blokTextu.zobraz();
+            this.jeZobrazeny = true;
+            this.casovac = 10;
         }
     }
 
-    private void utokMonstrum(int x, int y) {
+    private boolean utokMonstrum(int x, int y) {
         for (HernyObjekt hernyObjekt : mapa.getPrekazky()) {
             if (hernyObjekt instanceof Postava postava) {
                 if (postava.getX() < x && postava.getX() + postava.getSirka() > x && postava.getY() < y && postava.getY() + postava.getVyska() > y) {
                     System.out.println("Utok na postavu" + postava.getCestaKObrazku());
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     private boolean rozhovorNPC(int x, int y) {
