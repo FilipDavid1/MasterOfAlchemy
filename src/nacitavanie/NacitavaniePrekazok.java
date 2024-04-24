@@ -18,7 +18,7 @@ public class NacitavaniePrekazok {
     public NacitavaniePrekazok(Mapa mapa, Manazer manazer) {
         List<Map<String, String>> prekazkyData = null;
         try {
-            prekazkyData = this.nacitajPrekazky("/Users/filipdavid/Desktop/inf2/MasterOfAlchemy/src/nacitavanie/prekazky.txt");
+            prekazkyData = this.nacitajPrekazky("resources/prekazky.txt");
         } catch (IOException e) {
             e.getMessage();
         }
