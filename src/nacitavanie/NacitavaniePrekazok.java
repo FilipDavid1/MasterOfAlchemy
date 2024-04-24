@@ -2,6 +2,7 @@ package nacitavanie;
 
 import Mapa.Mapa;
 import Prekazky.HernyObjekt;
+import Prekazky.Postavy.Postava;
 import fri.shapesge.Manazer;
 
 import java.io.BufferedReader;
@@ -14,8 +15,10 @@ import java.util.List;
 import java.util.Map;
 
 public class NacitavaniePrekazok {
+    private Mapa mapa;
 
     public NacitavaniePrekazok(Mapa mapa, Manazer manazer) {
+        this.mapa = mapa;
         List<Map<String, String>> prekazkyData = null;
         try {
             prekazkyData = this.nacitajPrekazky("resources/prekazky.txt");
@@ -85,8 +88,8 @@ public class NacitavaniePrekazok {
             }
             System.out.println("Vytvaram objekt: " + plneMenoTriedy);
             Class<?> clazz = Class.forName(plneMenoTriedy);
-            Constructor<?> ctor = clazz.getConstructor(int.class, String.class, int.class, int.class);
-            return (HernyObjekt) ctor.newInstance(pocetObrazkov, cestaKObrazku, x, y);
+            Constructor<?> ctor = clazz.getConstructor(int.class, String.class, int.class, int.class, Postava.class);
+            return (HernyObjekt) ctor.newInstance(pocetObrazkov, cestaKObrazku, x, y, mapa.getHrac());
         } catch (Exception e) {
             e.printStackTrace();
         }

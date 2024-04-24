@@ -5,6 +5,7 @@ import Prekazky.Postavy.Postava;
 import Veci.Ingrediencie.Ingrediencia;
 import Veci.Ingrediencie.Ingrediencie;
 import fri.shapesge.DataObrazku;
+import fri.shapesge.Manazer;
 import fri.shapesge.Obrazok;
 
 import java.util.ArrayList;
@@ -22,8 +23,10 @@ public class Mapa {
 
     private ArrayList<Ingrediencia> ingrediencie;
 
+    private Postava hrac;
+    private Manazer manazer;
 
-    public Mapa() {
+    public Mapa(Manazer manazer) {
 
         this.mapaObr = new Obrazok("resources/Obrazky/Mapa/map.png");
         this.data = new DataObrazku("resources/Obrazky/Mapa/map.png");
@@ -34,6 +37,8 @@ public class Mapa {
         this.prekazky = new ArrayList<>();
         this.questy = new ArrayList<>();
         this.ingrediencie = new ArrayList<>();
+        this.manazer = manazer;
+        manazer.spravujObjekt(this);
     }
 
     public void nastavPolohu(String strana, float speed){
@@ -64,6 +69,9 @@ public class Mapa {
     }
 
 
+    public void tik() {
+        this.vymazMrtvePrekazky();
+    }
 
 
     public int getX() {
@@ -124,12 +132,14 @@ public class Mapa {
         }
     }
 
-    public void vymazMrtvePrekazky() {
+    private void vymazMrtvePrekazky() {
         ArrayList<HernyObjekt> mrtvePrekazky = new ArrayList<>();
         for (HernyObjekt prekazka : this.prekazky) {
             if (prekazka instanceof Postava postava) {
                 if (!postava.jeZivy()) {
                     mrtvePrekazky.add(prekazka);
+                    //manazer prestane spravovat objekt
+                    manazer.prestanSpravovatObjekt(postava);
                     Ingrediencia ingrediencia = new Ingrediencia(Ingrediencie.getRandomIngredienciu(), postava.getX(), postava.getY());
                     this.pridajIngredienciu(ingrediencia);
                 }
@@ -154,5 +164,13 @@ public class Mapa {
 
     public ArrayList<Ingrediencia> getIngrediencie() {
         return this.ingrediencie;
+    }
+
+    public void setHrac(Postava hrac) {
+        this.hrac = hrac;
+    }
+
+    public Postava getHrac() {
+        return hrac;
     }
 }
