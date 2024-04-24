@@ -64,7 +64,7 @@ public class Interakcia {
         for (HernyObjekt hernyObjekt : mapa.getPrekazky()) {
             if (hernyObjekt instanceof Postava postava) {
                 if (postava.getX() < x && postava.getX() + postava.getSirka() > x && postava.getY() < y && postava.getY() + postava.getVyska() > y) {
-                    System.out.println("Utok na postavu" + postava.getCestaKObrazku());
+                    hrac.vyberMonstrum(postava);
                     return true;
                 }
             }

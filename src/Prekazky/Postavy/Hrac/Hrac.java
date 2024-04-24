@@ -10,7 +10,6 @@ import Veci.Ingrediencie.Ingrediencia;
 import Veci.Vec;
 import fri.shapesge.Kruh;
 import fri.shapesge.Manazer;
-import fri.shapesge.Obrazok;
 
 public class Hrac extends Postava {
     private final Mapa mapa;
@@ -20,6 +19,8 @@ public class Hrac extends Postava {
 
     private Interakcia interakcia;
 
+    private Postava vybrateMonstrum;
+
     public Hrac(int pocetObrazkovIdle, int pocetObrazkovWalk, String nazov, int x, int y, Mapa mapa, Manazer manazer) {
         super(pocetObrazkovIdle, nazov, x, y);
         this.mapa = mapa;
@@ -27,6 +28,7 @@ public class Hrac extends Postava {
         this.inventar = new Inventar();
         this.interakcia = new Interakcia(mapa, this.inventar, this);
         manazer.spravujObjekt(this.interakcia);
+        this.vybrateMonstrum = null;
     }
 
     public void chodDole() {
@@ -127,47 +129,27 @@ public class Hrac extends Postava {
 
 
     public void utocNaMonstra() {
-        Drak najblizsieMonstrum = najdiNajblizsieMonstrum();
-        if (najblizsieMonstrum != null) {
-            utok(najblizsieMonstrum);
+        if (this.vybrateMonstrum != null) {
+            interakcia(this.vybrateMonstrum);
         }
     }
 
-
-
-    private Drak najdiNajblizsieMonstrum() {
-        Drak najblizsieMonstrum = null;
-        double najkratsiaVzdialenost = Double.MAX_VALUE;
-        this.mapa.vymazMrtvePrekazky();
-        for (HernyObjekt objekt : mapa.getPrekazky()) {
-            if (objekt instanceof Drak) {
-                Drak drak = (Drak) objekt;
-                double vzdialenost = Math.sqrt(Math.pow(super.getX() - drak.getX(), 2) + Math.pow(super.getY() - drak.getY(), 2));
-
-                if (vzdialenost < najkratsiaVzdialenost) {
-                    najblizsieMonstrum = drak;
-                    najkratsiaVzdialenost = vzdialenost;
-                }
-            }
-        }
-
-        return najblizsieMonstrum;
+    public void vyberMonstrum(Postava monstum) {
+        this.vybrateMonstrum = monstum;
     }
 
 
-
+    @Override
+    public void interakcia(Postava postava) {
+        postava.uberHp(10);
+        this.attackAnimacia(super.getCestaKObrazku().replace("/Idle/Idle_Down_0", "/Attack/Attack_") + super.getOrientacia() + "_", 6 );
+    }
 
     private float lerp(float start, float end, float speed) {
         return start + speed * (end - start);
     }
 
-    @Override
-    public void utok(Postava postava) {
-        //attack animation
-        postava.uberHp(10);
 
-        this.attackAnimacia(super.getCestaKObrazku().replace("/Idle/Idle_Down_0", "/Attack/Attack_") + super.getOrientacia() + "_", 6 );
-    }
 
 
 }

@@ -18,7 +18,7 @@ public abstract class Postava extends HernyObjekt {
         this.hpBar = new HpBar(x-20, y - 10);
     }
 
-    public abstract void utok(Postava postava);
+    public abstract void interakcia(Postava postava);
 
     @Override
     public void nastavObrazok() {
