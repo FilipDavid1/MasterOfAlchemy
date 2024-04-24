@@ -1,27 +1,27 @@
 typ: monstrum
 meno: Drak
 pocetObrazkov: 5
-cestaKObrazku: resources/Obrazky/Monstra/Drak/Attack/Attack_
+cestaKObrazku: resources/Obrazky/Monstra/Drak/Idle/Idle_
 x: 505
 y: 400
 
 typ: monstrum
 meno: Drak
 pocetObrazkov: 5
-cestaKObrazku: resources/Obrazky/Monstra/Drak/Attack/Attack_
+cestaKObrazku: resources/Obrazky/Monstra/Drak/Idle/Idle_
 x: 50
 y: 60
 
 typ: monstrum
 meno: Drak
 pocetObrazkov: 5
-cestaKObrazku: resources/Obrazky/Monstra/Drak/Attack/Attack_
+cestaKObrazku: resources/Obrazky/Monstra/Drak/Idle/Idle_
 x: 500
 y: 60
 
 typ: monstrum
 meno: Drak
 pocetObrazkov: 5
-cestaKObrazku: resources/Obrazky/Monstra/Drak/Attack/Attack_
+cestaKObrazku: resources/Obrazky/Monstra/Drak/Idle/Idle_
 x: 70
 y: 300

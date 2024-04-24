@@ -25,7 +25,7 @@ public class Hrac extends Postava {
         this.mapa = mapa;
         this.kruh = new Kruh();
         this.inventar = new Inventar();
-        this.interakcia = new Interakcia(mapa, this.inventar);
+        this.interakcia = new Interakcia(mapa, this.inventar, this);
         manazer.spravujObjekt(this.interakcia);
     }
 

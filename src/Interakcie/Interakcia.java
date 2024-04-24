@@ -1,6 +1,7 @@
 package Interakcie;
 
 import Prekazky.HernyObjekt;
+import Prekazky.Postavy.Hrac.Hrac;
 import Prekazky.Postavy.Hrac.Inventar;
 import Mapa.Mapa;
 import Prekazky.Postavy.Postava;
@@ -9,16 +10,21 @@ import Veci.Ingrediencie.Ingrediencia;
 public class Interakcia {
     private Mapa mapa;
     private Inventar inventar;
-    public Interakcia(Mapa mapa, Inventar inventar) {
+
+    private Hrac hrac;
+    public Interakcia(Mapa mapa, Inventar inventar, Hrac hrac) {
         this.mapa = mapa;
         this.inventar = inventar;
+        this.hrac = hrac;
     }
 
 
     public void vyberSuradnice(int x, int y) {
-        if (!this.zoberIngredienciu(x, y)) {
-            if (!this.rozhovorNPC(x, y)) {
-                this.utokMonstrum(x, y);
+        if (jeVDosahu(x, y)) {
+            if (!this.zoberIngredienciu(x, y)) {
+                if (!this.rozhovorNPC(x, y)) {
+                    this.utokMonstrum(x, y);
+                }
             }
         }
     }
@@ -54,5 +60,19 @@ public class Interakcia {
     private void pridajIngredienciuDoInventara(Ingrediencia ingrediencia){
         this.inventar.pridajVec(ingrediencia);
         this.mapa.vymazIngredienciu(ingrediencia);
+    }
+
+    private boolean jeVDosahu(int x, int y) {
+        //ak je x alebo y v mape rovne 0 tak over hracove x alebo y inak overuj v mape
+        int dosah = 100;
+        if (mapa.getX() == 0) {
+            if (mapa.getY() == 0) {
+                return Math.sqrt(Math.pow(hrac.getX() - x, 2) + Math.pow(hrac.getY() - y, 2)) <= dosah;
+            } else {
+                return Math.sqrt(Math.pow(hrac.getX() - x, 2) + Math.pow(mapa.getY() - y, 2)) <= dosah;
+            }
+        } else {
+            return Math.sqrt(Math.pow(mapa.getX() - x, 2) + Math.pow(mapa.getY() - y, 2)) <= dosah;
+        }
     }
 }

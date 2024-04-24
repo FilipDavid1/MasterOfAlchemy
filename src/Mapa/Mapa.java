@@ -11,15 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mapa {
-    private int[][] mapa;
     private Obrazok mapaObr;
 
     private DataObrazku data;
     private int x;
     private int y;
-
-    private double miniX;
-    private double miniY;
 
     private ArrayList<HernyObjekt> prekazky;
     private ArrayList<Quest> questy;
@@ -31,13 +27,10 @@ public class Mapa {
 
         this.mapaObr = new Obrazok("resources/Obrazky/Mapa/map.png");
         this.data = new DataObrazku("resources/Obrazky/Mapa/map.png");
-        this.mapa = new int[data.getSirka()][data.getVyska()];
         this.mapaObr.zmenPolohu(0, 0);
         this.mapaObr.zobraz();
         this.x = 0;
         this.y = 0;
-        this.miniX = Math.abs(this.x)/2;
-        this.miniY = Math.abs(this.y)/2;
         this.prekazky = new ArrayList<>();
         this.questy = new ArrayList<>();
         this.ingrediencie = new ArrayList<>();
@@ -66,8 +59,6 @@ public class Mapa {
         this.mapaObr.zmenPolohu((int)newX, (int)newY);
         this.x = (int)newX;
         this.y = (int)newY;
-        this.miniX += (newX - xBefore) * 0.35;
-        this.miniY += (newY - yBefore) * 0.35;
 
         this.posunHerneObjekty( this.x - xBefore , this.y - yBefore);
     }
@@ -107,7 +98,7 @@ public class Mapa {
         }
     }
 
-    public void pridajIngredienciu(Ingrediencia ingrediencia) {
+    private void pridajIngredienciu(Ingrediencia ingrediencia) {
         this.ingrediencie.add(ingrediencia);
     }
 
@@ -128,8 +119,8 @@ public class Mapa {
         }
 
         for (Ingrediencia ingrediencia : this.ingrediencie) {
-            ingrediencia.setX(ingrediencia.getX() + x, ingrediencia.getObrazok());
-            ingrediencia.setY(ingrediencia.getY() + y, ingrediencia.getObrazok());
+            ingrediencia.setX(ingrediencia.getX() + x, ingrediencia.getObrazok(), ingrediencia.getBlokTextu());
+            ingrediencia.setY(ingrediencia.getY() + y, ingrediencia.getObrazok(), ingrediencia.getBlokTextu());
         }
     }
 
@@ -140,7 +131,7 @@ public class Mapa {
                 if (!postava.jeZivy()) {
                     mrtvePrekazky.add(prekazka);
                     Ingrediencia ingrediencia = new Ingrediencia(Ingrediencie.getRandomIngredienciu(), postava.getX(), postava.getY());
-                    this.ingrediencie.add(ingrediencia);
+                    this.pridajIngredienciu(ingrediencia);
                 }
             }
         }
