@@ -1,5 +1,6 @@
 package Prekazky.Postavy.Hrac;
 
+import Interakcie.Interakcia;
 import Mapa.Mapa;
 import Prekazky.HernyObjekt;
 import Prekazky.Postavy.Monstra.Drak;
@@ -8,6 +9,7 @@ import Prekazky.Postavy.Postava;
 import Veci.Ingrediencie.Ingrediencia;
 import Veci.Vec;
 import fri.shapesge.Kruh;
+import fri.shapesge.Manazer;
 import fri.shapesge.Obrazok;
 
 public class Hrac extends Postava {
@@ -16,11 +18,15 @@ public class Hrac extends Postava {
     private Inventar inventar;
     private float speed = 0.7f;
 
-    public Hrac(int pocetObrazkovIdle, int pocetObrazkovWalk, String nazov, int x, int y, Mapa mapa) {
+    private Interakcia interakcia;
+
+    public Hrac(int pocetObrazkovIdle, int pocetObrazkovWalk, String nazov, int x, int y, Mapa mapa, Manazer manazer) {
         super(pocetObrazkovIdle, nazov, x, y);
         this.mapa = mapa;
         this.kruh = new Kruh();
         this.inventar = new Inventar();
+        this.interakcia = new Interakcia(mapa, this.inventar);
+        manazer.spravujObjekt(this.interakcia);
     }
 
     public void chodDole() {
@@ -127,14 +133,7 @@ public class Hrac extends Postava {
         }
     }
 
-    public void zoberIngredienciu() {
-        try {
-            Ingrediencia najblizsiaIngrediencia = najdiIngredienciu();
-            zoberNajbIngredienciu(najblizsiaIngrediencia);
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+
 
     private Drak najdiNajblizsieMonstrum() {
         Drak najblizsieMonstrum = null;
@@ -155,27 +154,7 @@ public class Hrac extends Postava {
         return najblizsieMonstrum;
     }
 
-    private Ingrediencia najdiIngredienciu() {
-        double minVzdialenost = Double.MAX_VALUE;
-        Ingrediencia najblizsiaIngrediencia = null;
 
-        for (Ingrediencia ingrediencia : this.mapa.getIngrediencie()) {
-            double vzdialenost = 0;
-            if (super.getX() == 725 && super.getY() == 450 ) {
-                vzdialenost = Math.sqrt(Math.pow(mapa.getX() - ingrediencia.getX(), 2) + Math.pow(mapa.getY() - ingrediencia.getY(), 2));
-            }
-            if (vzdialenost < minVzdialenost && vzdialenost <= 100) {
-                minVzdialenost = vzdialenost;
-                najblizsiaIngrediencia = ingrediencia;
-            }
-        }
-
-        if (najblizsiaIngrediencia == null) {
-            throw new RuntimeException("Žiadna ingrediencia nie je v dosahu 100px od hráča.");
-        }
-
-        return najblizsiaIngrediencia;
-    }
 
 
     private float lerp(float start, float end, float speed) {
@@ -190,11 +169,5 @@ public class Hrac extends Postava {
         this.attackAnimacia(super.getCestaKObrazku().replace("/Idle/Idle_Down_0", "/Attack/Attack_") + super.getOrientacia() + "_", 6 );
     }
 
-    //zober ingredienciu z mapy ak je hrac od nej max 50px
-    private void zoberNajbIngredienciu(Ingrediencia ingrediencia){
-        this.inventar.pridajVec(ingrediencia);
-        this.mapa.vymazIngredienciu(ingrediencia);
 
-        inventar.getVeci();
-    }
 }
