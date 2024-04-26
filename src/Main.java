@@ -1,8 +1,6 @@
-import Mapa.Mapa;
-import Prekazky.Postavy.Hrac.Hrac;
+import mapa.Mapa;
+import prekazky.postavy.hrac.Hrac;
 
-import Veci.Ingrediencie.Ingrediencia;
-import Veci.Ingrediencie.Ingrediencie;
 import fri.shapesge.Manazer;
 import nacitavanie.NacitavaniePrekazok;
 

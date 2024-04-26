@@ -1,8 +1,8 @@
 package nacitavanie;
 
-import Mapa.Mapa;
-import Prekazky.HernyObjekt;
-import Prekazky.Postavy.Postava;
+import mapa.Mapa;
+import prekazky.HernyObjekt;
+import prekazky.postavy.Postava;
 import fri.shapesge.Manazer;
 
 import java.io.BufferedReader;
@@ -80,16 +80,16 @@ public class NacitavaniePrekazok {
         try {
             String plneMenoTriedy;
             if (typ.equals("monstrum")) {
-                plneMenoTriedy = "Prekazky.Postavy.Monstra." + meno;
+                plneMenoTriedy = "prekazky.postavy.monstra." + meno;
             } else if (typ.equals("NPC")) {
-                plneMenoTriedy = "Prekazky.Postavy.NPC" + meno;
+                plneMenoTriedy = "prekazky.postavy.npc" + meno;
             } else {
                 plneMenoTriedy = meno;
             }
             System.out.println("Vytvaram objekt: " + plneMenoTriedy);
             Class<?> clazz = Class.forName(plneMenoTriedy);
             Constructor<?> ctor = clazz.getConstructor(int.class, String.class, int.class, int.class, Postava.class);
-            return (HernyObjekt) ctor.newInstance(pocetObrazkov, cestaKObrazku, x, y, mapa.getHrac());
+            return (HernyObjekt)ctor.newInstance(pocetObrazkov, cestaKObrazku, x, y, mapa.getHrac());
         } catch (Exception e) {
             e.printStackTrace();
         }
