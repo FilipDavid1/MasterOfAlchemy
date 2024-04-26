@@ -1,11 +1,11 @@
 package prekazky.postavy.hrac;
 
 import veci.ingrediencie.Ingrediencia;
-import veci.Vec;
+import veci.IVec;
 
 import java.util.ArrayList;
 
-public class Inventar<E extends Vec> {
+public class Inventar<E extends IVec> {
     private ArrayList< E> veci;
 
     public Inventar() {
@@ -16,17 +16,17 @@ public class Inventar<E extends Vec> {
         this.veci.add(vec);
     }
 
-    public void odstranVec(Vec vec) {
+    public void odstranVec(IVec vec) {
         this.veci.remove(vec);
     }
 
     public void odstranVeci(ArrayList<Ingrediencia> veci) {
-        for (Vec vec : veci) {
+        for (IVec vec : veci) {
             this.odstranVec(vec);
         }
     }
 
-    public Vec getVec(String vec) {
+    public IVec getVec(String vec) {
         for (E e : veci) {
             if (e.getNazov().equals(vec)) {
                 return e;
@@ -35,12 +35,12 @@ public class Inventar<E extends Vec> {
         return null;
     }
 
-    public boolean obsahujeVec(Vec vec) {
+    public boolean obsahujeVec(IVec vec) {
         return this.veci.contains(vec);
     }
 
     public void getVeci() {
-        for (Vec vec : veci) {
+        for (IVec vec : veci) {
             System.out.println(vec.getNazov());
         }
     }

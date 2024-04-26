@@ -1,7 +1,6 @@
 package prekazky.postavy;
 
 import prekazky.HernyObjekt;
-import fri.shapesge.Obrazok;
 
 public abstract class Postava extends HernyObjekt {
     private int animacia;

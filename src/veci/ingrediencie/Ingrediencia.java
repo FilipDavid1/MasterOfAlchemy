@@ -1,12 +1,12 @@
 package veci.ingrediencie;
 
 import prekazky.HernaEntita;
-import veci.Vec;
+import veci.IVec;
 import fri.shapesge.BlokTextu;
 import fri.shapesge.DataObrazku;
 import fri.shapesge.Obrazok;
 
-public class Ingrediencia extends HernaEntita implements Vec {
+public class Ingrediencia extends HernaEntita implements IVec {
 
     private final Obrazok obrazok;
 

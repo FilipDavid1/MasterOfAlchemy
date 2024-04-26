@@ -2,7 +2,7 @@ package veci;
 
 import fri.shapesge.Obrazok;
 
-public interface Vec {
+public interface IVec {
     String getNazov();
 
     Obrazok getObrazok();

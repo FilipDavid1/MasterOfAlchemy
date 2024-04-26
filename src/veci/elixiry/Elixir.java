@@ -3,12 +3,12 @@ package veci.elixiry;
 import prekazky.postavy.Postava;
 import veci.ingrediencie.Ingrediencia;
 import veci.ingrediencie.Ingrediencie;
-import veci.Vec;
+import veci.IVec;
 import fri.shapesge.Obrazok;
 
 import java.util.List;
 
-public abstract class Elixir implements Vec {
+public abstract class Elixir implements IVec {
 
     private final String nazov;
     private final Ingrediencie[] potrebneIngredience;

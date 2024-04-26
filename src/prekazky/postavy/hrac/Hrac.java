@@ -5,7 +5,7 @@ import mapa.Mapa;
 import prekazky.postavy.OrientaciaPostavy;
 import prekazky.postavy.Postava;
 import veci.ingrediencie.Ingrediencia;
-import veci.Vec;
+import veci.IVec;
 import fri.shapesge.Kruh;
 import fri.shapesge.Manazer;
 
@@ -123,7 +123,7 @@ public class Hrac extends Postava {
         return this.inventar;
     }
 
-    public void pridajVecDoInventara(Vec vec) {
+    public void pridajVecDoInventara(IVec vec) {
         this.inventar.pridajVec(vec);
     }
 
