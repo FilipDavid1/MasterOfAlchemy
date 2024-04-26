@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mapa {
-    private Obrazok mapaObr;
+    private final Obrazok mapaObr;
 
-    private DataObrazku data;
+    private final DataObrazku data;
     private int x;
     private int y;
 
@@ -24,7 +24,10 @@ public class Mapa {
     private ArrayList<Ingrediencia> ingrediencie;
 
     private Postava hrac;
-    private Manazer manazer;
+    private final Manazer manazer;
+
+    private double velX;
+    private double velY;
 
     public Mapa(Manazer manazer) {
 
@@ -41,36 +44,47 @@ public class Mapa {
         manazer.spravujObjekt(this);
     }
 
-    public void nastavPolohu(String strana, float speed){
-        int xBefore = this.x;
-        int yBefore = this.y;
-
-        float targetX = this.x;
-        float targetY = this.y;
-
-        if (strana.equals("dole") && this.y != -1850) {
-            targetY = this.y - 10;
-        } else if (strana.equals("hore") && this.y != 0) {
-            targetY = this.y + 10;
-        } else if (strana.equals("vpravo") && this.x != -2910) {
-            targetX = this.x - 10;
-        } else if (this.x != 0) {
-            targetX = this.x + 10;
-        }
-
-        float newX = lerp(this.x, targetX, speed);
-        float newY = lerp(this.y, targetY, speed);
-
-        this.mapaObr.zmenPolohu((int)newX, (int)newY);
-        this.x = (int)newX;
-        this.y = (int)newY;
-
-        this.posunHerneObjekty( this.x - xBefore , this.y - yBefore);
+    public void setVelX(double velX) {
+        this.velX = velX;
     }
 
+    public void setVelY(double velY) {
+        this.velY = velY;
+    }
 
-    public void tik() {
+    public void stopX() {
+        this.setVelX(0);
+    }
+
+    public void stopY() {
+        this.setVelY(0);
+    }
+
+    public void mapTik() {
         this.vymazMrtvePrekazky();
+        int stareX = this.x;
+        int stareY = this.y;
+
+        this.x += this.velX;
+        this.y += this.velY;
+
+        if (this.y >= 0) {
+            this.y = 0;
+        } else if (this.y <= -1840) {
+            this.y = -1840;
+        }
+
+        if (this.x >= 0) {
+            this.x = 0;
+        } else if (this.x <= -2910) {
+            this.x = -2910;
+        }
+
+        int noveX = this.x;
+        int noveY = this.y;
+        this.mapaObr.zmenPolohu(this.x, this.y);
+
+        this.posunHerneObjekty(noveX - stareX, noveY - stareY);
     }
 
 
@@ -81,15 +95,6 @@ public class Mapa {
     public int getY() {
         return y;
     }
-
-    public int getMiniX() {
-        return (int) (Math.abs(this.x) / (double) data.getSirka() );
-    }
-
-    public int getMiniY() {
-        return (int) (Math.abs(this.y) / (double) data.getVyska());
-    }
-
 
     public void pridajPrekazku(HernyObjekt prekazka) {
         //set x and y of the object + x and y of the location
@@ -150,12 +155,10 @@ public class Mapa {
     }
 
     public ArrayList<HernyObjekt> getPrekazky() {
-        return this.prekazky;
+//        return Collections.unmodifiableList(this.prekazky);
+//        return this.prekazky.stream();
+        return new ArrayList<>(this.prekazky);
     }
-    public float lerp(float start, float end, float speed) {
-        return (1 - speed) * start + speed * end;
-    }
-
     public void vymazIngredienciu(Ingrediencia ingrediencia) {
         ingrediencia.skry();
         this.ingrediencie.remove(ingrediencia);
@@ -163,7 +166,7 @@ public class Mapa {
     }
 
     public ArrayList<Ingrediencia> getIngrediencie() {
-        return this.ingrediencie;
+        return new ArrayList<>(this.ingrediencie);
     }
 
     public void setHrac(Postava hrac) {
@@ -171,6 +174,7 @@ public class Mapa {
     }
 
     public Postava getHrac() {
+        Postava hrac = this.hrac;
         return hrac;
     }
 }
