@@ -13,7 +13,7 @@ public class Hrac extends Postava {
     private final Mapa mapa;
     private final Kruh kruh;
     private Inventar inventar;
-    private float speed = 0.7f;
+
 
     private Interakcia interakcia;
 
@@ -31,7 +31,7 @@ public class Hrac extends Postava {
 
     public void chodDole() {
         float targetY = super.getY() + 10; // Cieľová pozícia.
-        float newY = lerp(super.getY(), targetY, speed); // Vypočíta novú pozíciu.
+        float newY = lerp(super.getY(), targetY, super.getSpeed()); // Vypočíta novú pozíciu.
         if (this.mapa.getY() <= -1840 || super.getY() != 450) {
             super.posunNa(super.getX(), (int)newY);
         }
@@ -46,7 +46,7 @@ public class Hrac extends Postava {
 
     public void chodHore() {
         float targetY = super.getY() - 10; // Cieľová pozícia.
-        float newY = lerp(super.getY(), targetY, speed); // Vypočít
+        float newY = lerp(super.getY(), targetY, super.getSpeed()); // Vypočít
         if (this.mapa.getY() >= 0 || super.getY() != 450) {
             super.posunNa(super.getX(), (int)newY);
         }
@@ -61,15 +61,14 @@ public class Hrac extends Postava {
 
     public void chodVlavo() {
         float targetX = super.getX() - 10; // Cieľová pozícia.
-        float newX = lerp(super.getX(), targetX, speed); // Vypočít
-        if (this.mapa.getX() >= 0 || super.getX() != 725) {
+        float newX = lerp(super.getX(), targetX, super.getSpeed()); // Vypočít
+        if (this.mapa.getX() >= 0 || super.getX() <= 725) {
             super.posunNa((int)newX, super.getY());
-
         }
         this.krok("Walk_Left_");
         super.setOrientacia(OrientaciaPostavy.LEFT);
         this.hybeSa();
-        if (super.getX() == 725) {
+        if (super.getX() >= 725) {
 //            this.mapa.nastavPolohu("vlavo", speed);
             this.mapa.setVelX(5);
         }
@@ -77,15 +76,14 @@ public class Hrac extends Postava {
 
     public void chodVpravo() {
         float targetX = super.getX() + 10; // Cieľová pozícia.
-        float newX = lerp(super.getX(), targetX, speed); // Vypočít
-        if (this.mapa.getX() <= -2910 || super.getX() != 725) {
+        float newX = lerp(super.getX(), targetX, super.getSpeed()); // Vypočít
+        if (this.mapa.getX() <= -2910 || super.getX() <= 725) {
             super.posunNa((int)newX, super.getY());
         }
         this.krok("Walk_Right_");
         super.setOrientacia(OrientaciaPostavy.RIGHT);
         this.hybeSa();
-        if (super.getX() == 725) {
-//            this.mapa.nastavPolohu("vpravo", speed);
+        if (super.getX() >= 725) {
             this.mapa.setVelX(-5);
         }
     }

@@ -10,6 +10,8 @@ public abstract class Postava extends HernyObjekt {
 
     private HpBar hpBar;
 
+    private float speed = 0.7f;
+
 
     public Postava(int pocetObrazkov, String cestaKObrazku, int x, int y) {
         super(pocetObrazkov, cestaKObrazku, x, y);
@@ -86,5 +88,13 @@ public abstract class Postava extends HernyObjekt {
             animacia = 0;
         }
         super.zmenObrazok(  imgNazov + animacia + ".png");
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
     }
 }
