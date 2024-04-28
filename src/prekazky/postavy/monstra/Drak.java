@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Drak extends Postava {
     private Postava hrac;
     private ArrayList<Strela> strely;
+    private boolean utoci = false;
     public Drak(int pocetObrazkov, String cestaKObrazku, int x, int y, Postava hrac) {
         super(pocetObrazkov, cestaKObrazku + "0", x, y);
         this.hrac = hrac;
@@ -14,13 +15,15 @@ public class Drak extends Postava {
 
     @Override
     public void interakcia(Postava postava) {
-//        postava.uberHp(10);
-        this.strely.add(new Strela(super.getX(), super.getY(), 10));
+        this.strely.add(new Strela(super.getX() + (super.getSirka() / 2), super.getY() + (super.getVyska() / 2), 10));
     }
 
     public void tik() {
-        super.idleAnimacia(super.getCestaKObrazku().replace("0", ""));
-
+        if (this.utoci) {
+            super.attackAnimacia(super.getCestaKObrazku().replace("Idle/Idle_0", "Attack/Attack_"), 6);
+        } else {
+            super.idleAnimacia(super.getCestaKObrazku().replace("0", ""));
+        }
     }
 
     public void let() {
@@ -37,13 +40,12 @@ public class Drak extends Postava {
     }
 
     public void utok() {
-        utocNaHraca();
-    }
-
-    public void utocNaHraca() {
         double vzdialenost = Math.sqrt(Math.pow(super.getX() - hrac.getX(), 2) + Math.pow(super.getY() - hrac.getY(), 2));
         if (vzdialenost < 200) {
             interakcia(hrac);
+            this.utoci = true;
+        } else {
+            this.utoci = false;
         }
     }
 
