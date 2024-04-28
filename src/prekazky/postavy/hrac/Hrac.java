@@ -30,8 +30,8 @@ public class Hrac extends Postava {
     }
 
     public void chodDole() {
-        float targetY = super.getY() + 10; // Cieľová pozícia.
-        float newY = lerp(super.getY(), targetY, super.getSpeed()); // Vypočíta novú pozíciu.
+        float targetY = super.getY() + 10;
+        float newY = lerp(super.getY(), targetY, super.getSpeed());
         if (this.mapa.getY() <= -1840 || super.getY() != 450) {
             super.posunNa(super.getX(), (int)newY);
         }
@@ -39,14 +39,13 @@ public class Hrac extends Postava {
         super.setOrientacia(OrientaciaPostavy.DOWN);
         this.hybeSa();
         if (super.getY() == 450) {
-//            this.mapa.nastavPolohu("dole", speed);
-            this.mapa.setVelY(-5);
+            this.mapa.setVelY(-5 * ( super.getSpeed()));
         }
     }
 
     public void chodHore() {
-        float targetY = super.getY() - 10; // Cieľová pozícia.
-        float newY = lerp(super.getY(), targetY, super.getSpeed()); // Vypočít
+        float targetY = super.getY() - 10;
+        float newY = lerp(super.getY(), targetY, super.getSpeed());
         if (this.mapa.getY() >= 0 || super.getY() != 450) {
             super.posunNa(super.getX(), (int)newY);
         }
@@ -54,14 +53,13 @@ public class Hrac extends Postava {
         super.setOrientacia(OrientaciaPostavy.UP);
         this.hybeSa();
         if (super.getY() == 450) {
-//            this.mapa.nastavPolohu("hore", speed);
-            this.mapa.setVelY(5);
+            this.mapa.setVelY(5 * ( super.getSpeed()));
         }
     }
 
     public void chodVlavo() {
-        float targetX = super.getX() - 10; // Cieľová pozícia.
-        float newX = lerp(super.getX(), targetX, super.getSpeed()); // Vypočít
+        float targetX = super.getX() - 10;
+        float newX = lerp(super.getX(), targetX, super.getSpeed());
         if (this.mapa.getX() >= 0 || super.getX() <= 725) {
             super.posunNa((int)newX, super.getY());
         }
@@ -69,14 +67,13 @@ public class Hrac extends Postava {
         super.setOrientacia(OrientaciaPostavy.LEFT);
         this.hybeSa();
         if (super.getX() >= 725) {
-//            this.mapa.nastavPolohu("vlavo", speed);
-            this.mapa.setVelX(5);
+            this.mapa.setVelX(5 * ( super.getSpeed()));
         }
     }
 
     public void chodVpravo() {
-        float targetX = super.getX() + 10; // Cieľová pozícia.
-        float newX = lerp(super.getX(), targetX, super.getSpeed()); // Vypočít
+        float targetX = super.getX() + 10;
+        float newX = lerp(super.getX(), targetX, super.getSpeed());
         if (this.mapa.getX() <= -2910 || super.getX() <= 725) {
             super.posunNa((int)newX, super.getY());
         }
@@ -84,7 +81,7 @@ public class Hrac extends Postava {
         super.setOrientacia(OrientaciaPostavy.RIGHT);
         this.hybeSa();
         if (super.getX() >= 725) {
-            this.mapa.setVelX(-5);
+            this.mapa.setVelX(-5 * ( super.getSpeed()));
         }
     }
 
@@ -105,6 +102,10 @@ public class Hrac extends Postava {
     public void tik() {
         if (!super.getHybeSa()) {
             this.idleAnimacia(  super.getCestaKObrazku().replace("Down_0", "") + super.getOrientacia() + "_");
+        }
+
+        if (super.getCasOslabenia() > 0) {
+            super.oslabenie((super.getCasOslabenia() / 1000) - 1);
         }
     }
 

@@ -6,15 +6,14 @@ import prekazky.postavy.Postava;
 import static java.lang.Math.sqrt;
 
 public class Strela {
-    private float x; // Poloha strely
-    private float y; // Poloha strely
-    private float rychlost; // Rýchlosť strely
+    private float x;
+    private float y;
+    private float rychlost;
 
     private double dlzka;
 
-    private Kruh kruh; // Obrazok strely
+    private Kruh kruh;
 
-    // Konštruktor pre strelu
     public Strela(float x, float y, float rychlost) {
         this.x = x;
         this.y = y;
@@ -24,18 +23,14 @@ public class Strela {
         this.kruh.zmenPolohu((int)x, (int)y);
     }
 
-    // Metóda na aktualizáciu polohy strely
     public void aktualizuj(Postava hrac) {
-        // Vypočítaj vektor medzi strelou a hráčom
         float dx = hrac.getX() - x;
         float dy = hrac.getY() - y;
         this.dlzka = sqrt(dx * dx + dy * dy);
 
-        // Normalizuj vektor na dĺžku 1
         double normDx = dx / dlzka;
         double normDy = dy / dlzka;
 
-        // Aktualizuj polohu strely
         x += normDx * rychlost;
         y += normDy * rychlost;
         this.kruh.zmenPolohu((int)x, (int)y);
