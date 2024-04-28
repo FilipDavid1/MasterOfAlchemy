@@ -40,7 +40,7 @@ public class Interakcia {
 
 
     public void vyberSuradnice(int x, int y) {
-        if (jeVDosahu(x, y)) {
+        if (jeVDosahu((x + Math.abs(this.mapa.getX())), (y + Math.abs(this.mapa.getY())))) {
             if (!this.zoberIngredienciu(x, y)) {
                 if (!this.rozhovorNPC(x, y)) {
                     if (!this.utokMonstrum(x, y)) {
@@ -97,15 +97,9 @@ public class Interakcia {
 
     private boolean jeVDosahu(int x, int y) {
         //ak je x alebo y v mape rovne 0 tak over hracove x alebo y inak overuj v mape
-        int dosah = 100;
-        if (mapa.getX() == 0) {
-            if (mapa.getY() == 0) {
-                return Math.sqrt(Math.pow(hrac.getX() - x, 2) + Math.pow(hrac.getY() - y, 2)) <= dosah;
-            } else {
-                return Math.sqrt(Math.pow(hrac.getX() - x, 2) + Math.pow(mapa.getY() - y, 2)) <= dosah;
-            }
-        } else {
-            return Math.sqrt(Math.pow(mapa.getX() - x, 2) + Math.pow(mapa.getY() - y, 2)) <= dosah;
-        }
+        int dosah = 150;
+        var hracX = (this.hrac.getX() + Math.abs(this.mapa.getX()));
+        var hracY = (this.hrac.getY() + Math.abs(this.mapa.getY()));
+        return Math.sqrt(Math.pow(hracX - x, 2) + Math.pow(hracY - y, 2)) <= dosah;
     }
 }
