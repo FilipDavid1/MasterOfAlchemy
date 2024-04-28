@@ -12,6 +12,7 @@ public abstract class Postava extends HernyObjekt {
 
     private float speed = 0.7f;
 
+    private int casOslabenia = 0;
 
     public Postava(int pocetObrazkov, String cestaKObrazku, int x, int y) {
         super(pocetObrazkov, cestaKObrazku, x, y);
@@ -96,5 +97,19 @@ public abstract class Postava extends HernyObjekt {
 
     public void setSpeed(float speed) {
         this.speed = speed;
+    }
+
+    public void oslabenie(int sekundy) {
+        this.casOslabenia = sekundy;
+
+        if (this.casOslabenia == 0) {
+            this.speed = 0.7f;
+        } else {
+            this.speed = 0.3f;
+        }
+    }
+
+    public int getCasOslabenia() {
+        return casOslabenia * 1000;
     }
 }
