@@ -1,7 +1,7 @@
-typ: monstrum
-meno: Drak
-pocetObrazkov: 5
-cestaKObrazku: resources/Obrazky/Monstra/Drak/Idle/Idle_
+typ: npc
+meno: Alchymista
+pocetObrazkov: 1
+cestaKObrazku: resources/Obrazky/Monstra/LadovyGolem/idle_
 x: 505
 y: 400
 

@@ -4,7 +4,7 @@ import prekazky.postavy.Postava;
 
 import java.util.Random;
 
-public class Demon extends Postava {
+public class Demon extends Postava implements IMonstrum {
     private Postava hrac;
 
     private boolean utoci = false;
@@ -41,15 +41,4 @@ public class Demon extends Postava {
         }
 
     }
-
-    public void utok() {
-        double vzdialenost = Math.sqrt(Math.pow(super.getX() - hrac.getX(), 2) + Math.pow(super.getY() - hrac.getY(), 2));
-        if (vzdialenost < 200) {
-            interakcia(hrac);
-            this.utoci = true;
-        } else {
-            this.utoci = false;
-        }
-    }
-
 }

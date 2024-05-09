@@ -4,6 +4,7 @@ import interakcie.Interakcia;
 import mapa.Mapa;
 import prekazky.postavy.OrientaciaPostavy;
 import prekazky.postavy.Postava;
+import prekazky.postavy.monstra.IMonstrum;
 import veci.ingrediencie.Ingrediencia;
 import veci.IVec;
 import fri.shapesge.Kruh;
@@ -17,7 +18,7 @@ public class Hrac extends Postava {
 
     private Interakcia interakcia;
 
-    private Postava vybrateMonstrum;
+    private Postava vybrataPostava;
 
     public Hrac(int pocetObrazkovIdle, int pocetObrazkovWalk, String nazov, int x, int y, Mapa mapa, Manazer manazer) {
         super(pocetObrazkovIdle, nazov, x, y);
@@ -26,7 +27,7 @@ public class Hrac extends Postava {
         this.inventar = new Inventar();
         this.interakcia = new Interakcia(mapa, this.inventar, this);
         manazer.spravujObjekt(this.interakcia);
-        this.vybrateMonstrum = null;
+        this.vybrataPostava = null;
     }
 
     public void chodDole() {
@@ -130,20 +131,28 @@ public class Hrac extends Postava {
 
 
     public void utocNaMonstra() {
-        if (this.vybrateMonstrum != null) {
-            interakcia(this.vybrateMonstrum);
+
+        if (this.vybrataPostava != null) {
+            double vzdialenost = Math.sqrt(Math.pow(vybrataPostava.getX() - this.getX(), 2) + Math.pow(vybrataPostava.getY() - this.getY(), 2));
+            if (vzdialenost < 200) {
+                this.interakcia(this.vybrataPostava);
+            }
         }
     }
 
-    public void vyberMonstrum(Postava monstum) {
-        this.vybrateMonstrum = monstum;
+    public void vyberPostavu(Postava monstum) {
+        this.vybrataPostava = monstum;
     }
 
 
     @Override
     public void interakcia(Postava postava) {
-        postava.uberHp(10);
-        this.attackAnimacia(super.getCestaKObrazku().replace("/Idle/Idle_Down_0", "/Attack/Attack_") + super.getOrientacia() + "_", 6 );
+        if (postava instanceof IMonstrum ) {
+            postava.uberHp(10);
+            this.attackAnimacia(super.getCestaKObrazku().replace("/Idle/Idle_Down_0", "/Attack/Attack_") + super.getOrientacia() + "_", 6 );
+        } else {
+            postava.interakcia(this);
+        }
     }
 
     private float lerp(float start, float end, float speed) {

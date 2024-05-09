@@ -4,7 +4,7 @@ import prekazky.postavy.Postava;
 
 import java.util.Random;
 
-public class Golem extends Postava {
+public class Golem extends Postava implements IMonstrum {
     private Postava hrac;
     public Golem(int pocetObrazkov, String cestaKObrazku, int x, int y, Postava hrac) {
         super(pocetObrazkov, cestaKObrazku + "0", x, y);
@@ -26,10 +26,4 @@ public class Golem extends Postava {
         super.idleAnimacia(super.getCestaKObrazku().replace("0", ""));
     }
 
-    public void utok() {
-        double vzdialenost = Math.sqrt(Math.pow(super.getX() - hrac.getX(), 2) + Math.pow(super.getY() - hrac.getY(), 2));
-        if (vzdialenost < 200) {
-            interakcia(hrac);
-        }
-    }
 }

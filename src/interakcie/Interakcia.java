@@ -42,14 +42,12 @@ public class Interakcia {
     public void vyberSuradnice(int x, int y) {
         if (jeVDosahu((x + Math.abs(this.mapa.getX())), (y + Math.abs(this.mapa.getY())))) {
             if (!this.zoberIngredienciu(x, y)) {
-                if (!this.rozhovorNPC(x, y)) {
-                    if (!this.utokMonstrum(x, y)) {
-                        this.blokTextu.zmenText("Ziadny objekt na interakciu");
-                        this.blokTextu.zmenPolohu(0, 30);
-                        this.blokTextu.zobraz();
-                        this.jeZobrazeny = true;
-                        this.casovac = 10;
-                    }
+                if (!this.vyberPostavu(x, y)) {
+                    this.blokTextu.zmenText("Ziadny objekt na interakciu");
+                    this.blokTextu.zmenPolohu(0, 30);
+                    this.blokTextu.zobraz();
+                    this.jeZobrazeny = true;
+                    this.casovac = 10;
                 }
             }
         } else {
@@ -60,11 +58,16 @@ public class Interakcia {
         }
     }
 
-    private boolean utokMonstrum(int x, int y) {
+    private boolean vyberPostavu(int x, int y) {
         for (HernyObjekt hernyObjekt : mapa.getPrekazky()) {
             if (hernyObjekt instanceof Postava postava) {
                 if (postava.getX() < x && postava.getX() + postava.getSirka() > x && postava.getY() < y && postava.getY() + postava.getVyska() > y) {
-                    hrac.vyberMonstrum(postava);
+                    hrac.vyberPostavu(postava);
+                    this.blokTextu.zmenText("Vybral si postavu: " + postava.getClass().getSimpleName());
+                    this.blokTextu.zmenPolohu(0, 30);
+                    this.blokTextu.zobraz();
+                    this.jeZobrazeny = true;
+                    this.casovac = 20;
                     return true;
                 }
             }
@@ -72,9 +75,6 @@ public class Interakcia {
         return false;
     }
 
-    private boolean rozhovorNPC(int x, int y) {
-        return false;
-    }
 
     private boolean zoberIngredienciu(int x, int y) {
         System.out.println("x: " + x + " y: " + y);
@@ -83,7 +83,11 @@ public class Interakcia {
             System.out.println("ingrediencia x: " + ingrediencia.getX() + " y: " + ingrediencia.getY());
             if (ingrediencia.getX() < x && ingrediencia.getX() + ingrediencia.getSirka() > x && ingrediencia.getY() < y && ingrediencia.getY() + ingrediencia.getVyska() > y) {
                 this.pridajIngredienciuDoInventara(ingrediencia);
-                System.out.println("Zobral som ingredienciu");
+                this.blokTextu.zmenText("Zobral si ingredienciu: " + ingrediencia.getNazov());
+                this.blokTextu.zmenPolohu(0, 30);
+                this.blokTextu.zobraz();
+                this.jeZobrazeny = true;
+                this.casovac = 5;
                 return true;
             }
         }
@@ -97,7 +101,7 @@ public class Interakcia {
 
     private boolean jeVDosahu(int x, int y) {
         //ak je x alebo y v mape rovne 0 tak over hracove x alebo y inak overuj v mape
-        int dosah = 150;
+        int dosah = 500;
         var hracX = (this.hrac.getX() + Math.abs(this.mapa.getX()));
         var hracY = (this.hrac.getY() + Math.abs(this.mapa.getY()));
         return Math.sqrt(Math.pow(hracX - x, 2) + Math.pow(hracY - y, 2)) <= dosah;

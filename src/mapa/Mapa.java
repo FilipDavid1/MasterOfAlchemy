@@ -85,6 +85,22 @@ public class Mapa {
         this.mapaObr.zmenPolohu(this.x, this.y);
 
         this.posunHerneObjekty(noveX - stareX, noveY - stareY);
+
+    }
+
+    public void utok() {
+        this.interakciaPostav();
+    }
+
+    private void interakciaPostav() {
+        for (HernyObjekt prekazka : this.prekazky) {
+            if (prekazka instanceof Postava postava) {
+                double vzdialenost = Math.sqrt(Math.pow(postava.getX() - hrac.getX(), 2) + Math.pow(postava.getY() - hrac.getY(), 2));
+                if (vzdialenost < 200) {
+                    postava.interakcia(this.hrac);
+                }
+            }
+        }
     }
 
 

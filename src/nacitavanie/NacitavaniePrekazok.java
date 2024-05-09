@@ -81,8 +81,8 @@ public class NacitavaniePrekazok {
             String plneMenoTriedy;
             if (typ.equals("monstrum")) {
                 plneMenoTriedy = "prekazky.postavy.monstra." + meno;
-            } else if (typ.equals("NPC")) {
-                plneMenoTriedy = "prekazky.postavy.npc" + meno;
+            } else if (typ.equals("npc")) {
+                plneMenoTriedy = "prekazky.postavy.npc." + meno;
             } else {
                 plneMenoTriedy = meno;
             }

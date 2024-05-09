@@ -3,7 +3,7 @@ import prekazky.postavy.Postava;
 import prekazky.Strela;
 import java.util.ArrayList;
 
-public class Drak extends Postava {
+public class Drak extends Postava implements IMonstrum {
     private Postava hrac;
     private ArrayList<Strela> strely;
     private boolean utoci = false;
@@ -38,15 +38,4 @@ public class Drak extends Postava {
         }
         this.strely.removeAll(strelyNaVymazanie);
     }
-
-    public void utok() {
-        double vzdialenost = Math.sqrt(Math.pow(super.getX() - hrac.getX(), 2) + Math.pow(super.getY() - hrac.getY(), 2));
-        if (vzdialenost < 200) {
-            interakcia(hrac);
-            this.utoci = true;
-        } else {
-            this.utoci = false;
-        }
-    }
-
 }
