@@ -44,16 +44,18 @@ public class HernaEntita {
 
     public void setX(int x, Obrazok obrazok, BlokTextu blokTextu) {
         this.x = x;
-        blokTextu.zmenPolohu(x, y - 10);
+        blokTextu.zmenPolohu(x, y + 140);
         obrazok.zmenPolohu(x, y);
         obrazok.zobraz();
+        blokTextu.zobraz();
     }
 
     public void setY(int y, Obrazok obrazok, BlokTextu blokTextu) {
         this.y = y;
-        blokTextu.zmenPolohu(x, y - 10);
+        blokTextu.zmenPolohu(x, y + 40);
         obrazok.zmenPolohu(x, y);
         obrazok.zobraz();
+        blokTextu.zobraz();
     }
 
     public int getX() {
