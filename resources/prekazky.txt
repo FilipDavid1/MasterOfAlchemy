@@ -1,7 +1,7 @@
 typ: npc
 meno: Alchymista
 pocetObrazkov: 1
-cestaKObrazku: resources/Obrazky/Monstra/LadovyGolem/idle_
+cestaKObrazku: resources/Obrazky/Monstra/LadovyGolem/Idle/idle_
 x: 505
 y: 400
 
@@ -29,21 +29,21 @@ y: 300
 typ: monstrum
 meno: Golem
 pocetObrazkov: 7
-cestaKObrazku: resources/Obrazky/Monstra/LadovyGolem/Idle_
+cestaKObrazku: resources/Obrazky/Monstra/LadovyGolem/Idle/idle_
 x: 1805
 y: 40
 
 typ: monstrum
 meno: Golem
 pocetObrazkov: 7
-cestaKObrazku: resources/Obrazky/Monstra/LadovyGolem/Idle_
+cestaKObrazku: resources/Obrazky/Monstra/LadovyGolem/Idle/idle_
 x: 1250
 y: 610
 
 typ: monstrum
 meno: Golem
 pocetObrazkov: 7
-cestaKObrazku: resources/Obrazky/Monstra/LadovyGolem/Idle_
+cestaKObrazku: resources/Obrazky/Monstra/LadovyGolem/Idle/idle_
 x: 1500
 y: 160
 
