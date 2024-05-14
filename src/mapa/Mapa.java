@@ -2,6 +2,7 @@ package mapa;
 
 import prekazky.HernyObjekt;
 import prekazky.postavy.Postava;
+import prekazky.postavy.npc.Alchymista;
 import veci.ingrediencie.Ingrediencia;
 import veci.ingrediencie.Ingrediencie;
 import fri.shapesge.DataObrazku;
@@ -96,8 +97,11 @@ public class Mapa {
         for (HernyObjekt prekazka : this.prekazky) {
             if (prekazka instanceof Postava postava) {
                 double vzdialenost = Math.sqrt(Math.pow(postava.getX() - hrac.getX(), 2) + Math.pow(postava.getY() - hrac.getY(), 2));
-                if (vzdialenost < 200) {
+                if (vzdialenost < 200 && !(postava instanceof Alchymista)) {
                     postava.interakcia(this.hrac);
+                    postava.setUtoci(true);
+                } else {
+                    postava.setUtoci(false);
                 }
             }
         }

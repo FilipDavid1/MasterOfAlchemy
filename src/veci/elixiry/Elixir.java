@@ -1,11 +1,13 @@
 package veci.elixiry;
 
+import fri.shapesge.DataObrazku;
 import prekazky.postavy.Postava;
 import veci.ingrediencie.Ingrediencia;
 import veci.ingrediencie.Ingrediencie;
 import veci.IVec;
 import fri.shapesge.Obrazok;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Elixir implements IVec {
@@ -14,10 +16,13 @@ public abstract class Elixir implements IVec {
     private final Ingrediencie[] potrebneIngredience;
     private final Obrazok obrazok;
 
+    private final DataObrazku data;
+
     public Elixir(String nazov, Ingrediencie[] potrebneIngredience) {
         this.nazov = nazov;
         this.potrebneIngredience = potrebneIngredience;
         this.obrazok = new Obrazok("resources/Obrazky/Elixiry/" + nazov + ".png");
+        this.data = new DataObrazku("resources/Obrazky/Elixiry/" + nazov + ".png");
     }
 
     @Override
@@ -29,7 +34,7 @@ public abstract class Elixir implements IVec {
         for (Ingrediencie ingrediencia : potrebneIngredience) {
             boolean nasla = false;
             for (Ingrediencia i : ingrediencie) {
-                if (i.getNazov().equals(ingrediencia.getNazov())) {
+                if (i.getIngredienciaEnum() == ingrediencia) {
                     nasla = true;
                     break;
                 }
@@ -46,4 +51,17 @@ public abstract class Elixir implements IVec {
     }
 
     public abstract void pouzi(Postava postava);
+
+    public ArrayList<String> getPotrebneIngredience() {
+        return new ArrayList<String>() {{
+                for (Ingrediencie i : potrebneIngredience) {
+                    add(i.getNazov());
+                }
+            }};
+    }
+
+    @Override
+    public int getSirka() {
+        return data.getSirka();
+    }
 }

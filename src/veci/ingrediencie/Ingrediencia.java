@@ -13,6 +13,7 @@ public class Ingrediencia extends HernaEntita implements IVec {
     private final String nazov;
     private final DataObrazku dataObrazku;
     private final BlokTextu blokTextu;
+    private final Ingrediencie ingredienciaEnum;
     public Ingrediencia(String nazov, int x, int y) {
         this.obrazok = new Obrazok("resources/Obrazky/Ingrediencie/" + nazov + ".png");
         this.obrazok.zmenPolohu(x, y);
@@ -25,6 +26,7 @@ public class Ingrediencia extends HernaEntita implements IVec {
         this.blokTextu.zmenFarbu("white");
         this.blokTextu.zmenPolohu(x, y - 10);
         this.blokTextu.zobraz();
+        this.ingredienciaEnum = Ingrediencie.valueOf(nazov);
     }
     @Override
     public String getNazov() {
@@ -53,5 +55,9 @@ public class Ingrediencia extends HernaEntita implements IVec {
 
     public BlokTextu getBlokTextu() {
         return blokTextu;
+    }
+
+    public Ingrediencie getIngredienciaEnum() {
+        return this.ingredienciaEnum;
     }
 }
