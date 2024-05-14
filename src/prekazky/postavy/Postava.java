@@ -14,6 +14,8 @@ public abstract class Postava extends HernyObjekt {
 
     private int casOslabenia = 0;
 
+    private boolean utoci = false;
+
     public Postava(int pocetObrazkov, String cestaKObrazku, int x, int y) {
         super(pocetObrazkov, cestaKObrazku, x, y);
         this.orientacia = OrientaciaPostavy.DOWN;
@@ -111,5 +113,13 @@ public abstract class Postava extends HernyObjekt {
 
     public int getCasOslabenia() {
         return casOslabenia * 1000;
+    }
+
+    public void setUtoci(boolean utoci) {
+        this.utoci = utoci;
+    }
+
+    public boolean getUtoci() {
+        return utoci;
     }
 }

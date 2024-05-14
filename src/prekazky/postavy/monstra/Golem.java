@@ -23,7 +23,11 @@ public class Golem extends Postava implements IMonstrum {
     }
 
     public void tik() {
-        super.idleAnimacia(super.getCestaKObrazku().replace("0", ""));
+        if (super.getUtoci()) {
+            super.attackAnimacia(super.getCestaKObrazku().replace("Idle/idle_0", "Attack/Attack_"), 14);
+        } else {
+            super.idleAnimacia(super.getCestaKObrazku().replace("0", ""));
+        }
     }
 
 }

@@ -7,7 +7,6 @@ import java.util.Random;
 public class Demon extends Postava implements IMonstrum {
     private Postava hrac;
 
-    private boolean utoci = false;
     public Demon(int pocetObrazkov, String cestaKObrazku, int x, int y, Postava hrac) {
         super(pocetObrazkov, cestaKObrazku + "0", x, y);
         this.hrac = hrac;
@@ -31,7 +30,7 @@ public class Demon extends Postava implements IMonstrum {
     }
 
     public void tik() {
-        if (this.utoci) {
+        if (super.getUtoci()) {
             super.attackAnimacia(super.getCestaKObrazku().replace("demon_idle_0", "Attack/demon_cleave_"), 15);
         } else {
             super.idleAnimacia(super.getCestaKObrazku().replace("0", ""));

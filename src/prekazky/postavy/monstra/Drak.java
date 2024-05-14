@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class Drak extends Postava implements IMonstrum {
     private Postava hrac;
     private ArrayList<Strela> strely;
-    private boolean utoci = false;
     public Drak(int pocetObrazkov, String cestaKObrazku, int x, int y, Postava hrac) {
         super(pocetObrazkov, cestaKObrazku + "0", x, y);
         this.hrac = hrac;
@@ -19,7 +18,7 @@ public class Drak extends Postava implements IMonstrum {
     }
 
     public void tik() {
-        if (this.utoci) {
+        if (super.getUtoci()) {
             super.attackAnimacia(super.getCestaKObrazku().replace("Idle/Idle_0", "Attack/Attack_"), 6);
         } else {
             super.idleAnimacia(super.getCestaKObrazku().replace("0", ""));
