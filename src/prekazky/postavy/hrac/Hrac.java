@@ -90,6 +90,7 @@ public class Hrac extends Postava {
     public void stop() {
         this.nehybeSa();
         this.kruh.skry();
+        this.inventar.skryIngrediencieSInventara();
     }
 
     public void nehybeSa() {
@@ -131,7 +132,7 @@ public class Hrac extends Postava {
 
 
     public void utocNaMonstra() {
-
+        inventar.getVeci();
         if (this.vybrataPostava != null) {
             double vzdialenost = Math.sqrt(Math.pow(vybrataPostava.getX() - this.getX(), 2) + Math.pow(vybrataPostava.getY() - this.getY(), 2));
             if (vzdialenost < 200) {
@@ -153,13 +154,15 @@ public class Hrac extends Postava {
         } else {
             postava.interakcia(this);
         }
+
     }
 
     private float lerp(float start, float end, float speed) {
         return start + speed * (end - start);
     }
 
-
-
+    public void zobrazInventar() {
+        this.inventar.zobrazIngrediencieVInventari();
+    }
 
 }
