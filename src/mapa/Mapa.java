@@ -16,7 +16,6 @@ import java.util.List;
 public class Mapa {
     private final Obrazok mapaObr;
 
-    private final DataObrazku data;
     private int x;
     private int y;
 
@@ -34,7 +33,6 @@ public class Mapa {
     public Mapa(Manazer manazer) {
 
         this.mapaObr = new Obrazok("resources/Obrazky/Mapa/map.png");
-        this.data = new DataObrazku("resources/Obrazky/Mapa/map.png");
         this.mapaObr.zmenPolohu(0, 0);
         this.mapaObr.zobraz();
         this.x = 0;
@@ -162,7 +160,7 @@ public class Mapa {
         ArrayList<HernyObjekt> mrtvePrekazky = new ArrayList<>();
         for (HernyObjekt prekazka : this.prekazky) {
             if (prekazka instanceof Postava postava) {
-                if (!postava.jeZivy()) {
+                if (postava.jeMrtvy()) {
                     if (postava instanceof StrelecMonstrum strelec) {
                         strelec.zmazStrely();
                     }

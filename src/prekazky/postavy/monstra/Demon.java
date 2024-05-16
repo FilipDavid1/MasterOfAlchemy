@@ -37,7 +37,7 @@ public class Demon extends Postava implements IMonstrum {
         } else {
             super.idleAnimacia(super.getCestaKObrazku().replace("0", ""));
         }
-        if (!super.jeZivy()) {
+        if (super.jeMrtvy()) {
             this.hrac.oslabenie(0);
         }
 
