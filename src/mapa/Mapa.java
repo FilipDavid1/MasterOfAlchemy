@@ -2,6 +2,8 @@ package mapa;
 
 import prekazky.HernyObjekt;
 import prekazky.postavy.Postava;
+import prekazky.postavy.monstra.Drak;
+import prekazky.postavy.monstra.Goblin;
 import prekazky.postavy.npc.Alchymista;
 import veci.ingrediencie.Ingrediencia;
 import veci.ingrediencie.Ingrediencie;
@@ -162,6 +164,14 @@ public class Mapa {
         for (HernyObjekt prekazka : this.prekazky) {
             if (prekazka instanceof Postava postava) {
                 if (!postava.jeZivy()) {
+                    if (postava instanceof Goblin) {
+                        Goblin monster = (Goblin)postava;
+                        monster.zmazStrely();
+                    } else if (postava instanceof Drak) {
+                        Drak monster = (Drak)postava;
+                        monster.zmazStrely();
+                    }
+
                     mrtvePrekazky.add(prekazka);
                     //manazer prestane spravovat objekt
                     manazer.prestanSpravovatObjekt(postava);
