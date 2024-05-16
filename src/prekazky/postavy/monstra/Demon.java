@@ -8,7 +8,7 @@ public class Demon extends Postava implements IMonstrum {
     private Postava hrac;
 
     public Demon(int pocetObrazkov, String cestaKObrazku, int x, int y, Postava hrac) {
-        super(pocetObrazkov, cestaKObrazku + "0", x, y);
+        super(pocetObrazkov, cestaKObrazku + "0", x, y, 5);
         this.hrac = hrac;
     }
 
@@ -17,16 +17,18 @@ public class Demon extends Postava implements IMonstrum {
         Random rand = new Random();
         int nahoda = rand.nextInt(100);
         if (nahoda <= 15) {
-            postava.uberHp(15);
+            super.setSila(15);
             postava.oslabenie(2);
             System.out.println("Demon oslabuje hraca");
         } else if (nahoda <= 50) {
-            postava.uberHp(10);
+            super.setSila(10);
             postava.oslabenie(1);
             System.out.println("Demon oslabuje hraca");
         } else {
-            postava.uberHp(5);
+            super.setSila(5);
         }
+
+        postava.uberHp(super.getSila());
     }
 
     public void tik() {

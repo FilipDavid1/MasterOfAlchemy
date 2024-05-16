@@ -66,4 +66,8 @@ public class HernyObjekt extends HernaEntita {
     public void skryObrazok() {
         this.obrazok.skry();
     }
+
+    public void zobrazObrazok() {
+        this.obrazok.zobraz();
+    }
 }

@@ -7,14 +7,14 @@ public class Drak extends Postava implements IMonstrum {
     private Postava hrac;
     private ArrayList<Strela> strely;
     public Drak(int pocetObrazkov, String cestaKObrazku, int x, int y, Postava hrac) {
-        super(pocetObrazkov, cestaKObrazku + "0", x, y);
+        super(pocetObrazkov, cestaKObrazku + "0", x, y, 1);
         this.hrac = hrac;
         this.strely = new ArrayList<>();
     }
 
     @Override
     public void interakcia(Postava postava) {
-        this.strely.add(new Strela(super.getX() + (super.getSirka() / 2), super.getY() + (super.getVyska() / 2), 10));
+        this.strely.add(new Strela(super.getX() + (super.getSirka() / 2), super.getY() + (super.getVyska() / 2), 10, "resources/Obrazky/strela/Drak"));
     }
 
     public void tik() {
@@ -29,12 +29,20 @@ public class Drak extends Postava implements IMonstrum {
         ArrayList<Strela> strelyNaVymazanie = new ArrayList<>();
         for (Strela strela : strely) {
             strela.aktualizuj(this.hrac);
+            strela.idleAnimacia( 8);
             if (strela.getDlzka() < 10) {
-                this.hrac.uberHp(1);
+                this.hrac.uberHp(super.getSila());
                 strelyNaVymazanie.add(strela);
                 strela.skry();
             }
         }
         this.strely.removeAll(strelyNaVymazanie);
+    }
+
+    public void zmazStrely() {
+        for (Strela strela : strely) {
+            strela.skry();
+        }
+        this.strely.clear();
     }
 }

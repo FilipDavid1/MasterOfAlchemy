@@ -23,7 +23,7 @@ public class HpBar {
         this.y = y;
     }
 
-    public void uberHp(int kolko) {
+    public void uberHp(float kolko) {
         hp -= kolko;
         if (hp < 0) {
             hp = 0;
@@ -60,5 +60,13 @@ public class HpBar {
 
     public int getY() {
         return y;
+    }
+
+    public void pridajHp(float kolko) {
+        hp += kolko;
+        if (hp > 100) {
+            hp = 100;
+        }
+        vnutorny.zmenStrany(hp, 8);
     }
 }

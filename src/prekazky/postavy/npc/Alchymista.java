@@ -16,7 +16,7 @@ public class Alchymista extends Postava {
     private String[] elixiry = {"ElixirEnergie", "ElixirMoci", "ElixirMudrosti", "ElixirObnovenia", "ElixirObrany", "ElixirOdolnosti", "ElixirOdstraneniaKliadby", "ElixirOzivenia", "ElixirRegeneracie", "ElixirRychlosti", "ElixirSily", "ElixirSkrytia"};
     private BlokTextu blokTextu;
     public Alchymista(int pocetObrazkov, String cestaKObrazku, int x, int y, Postava hrac) {
-        super(pocetObrazkov, cestaKObrazku + "0", x, y);
+        super(pocetObrazkov, cestaKObrazku + "0", x, y, 0);
         this.blokTextu = new BlokTextu("", 0, 30);
         this.blokTextu.zmenFont("Courier New", StylFontu.BOLD, 15);
     }

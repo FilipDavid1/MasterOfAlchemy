@@ -16,10 +16,14 @@ public abstract class Postava extends HernyObjekt {
 
     private boolean utoci = false;
 
-    public Postava(int pocetObrazkov, String cestaKObrazku, int x, int y) {
+    private float sila;
+
+
+    public Postava(int pocetObrazkov, String cestaKObrazku, int x, int y, int sila) {
         super(pocetObrazkov, cestaKObrazku, x, y);
         this.orientacia = OrientaciaPostavy.DOWN;
         this.hpBar = new HpBar(x - 20, y - 10);
+        this.sila = sila;
     }
 
     public abstract void interakcia(Postava postava);
@@ -36,6 +40,7 @@ public abstract class Postava extends HernyObjekt {
             animacia = 0;
         }
         super.zmenObrazok(super.getCestaKObrazku().replace("Idle/Idle_Down_0", "") + "Walk/" + imgName + animacia + ".png");
+
     }
 
     public void idleAnimacia(String imgNazov) {
@@ -56,6 +61,11 @@ public abstract class Postava extends HernyObjekt {
         this.hpBar.skry();
     }
 
+    public void zobraz() {
+        super.zobrazObrazok();
+        this.hpBar.zobraz();
+    }
+
     public void setHybeSa(boolean hybeSa) {
         this.hybeSa = hybeSa;
     }
@@ -72,12 +82,16 @@ public abstract class Postava extends HernyObjekt {
         return orientacia.toString();
     }
 
-    public void uberHp(int kolko) {
+    public void uberHp(float kolko) {
         this.hpBar.uberHp(kolko);
         if (this.hpBar.getHp() <= 0) {
-            this.hpBar.skry();
             this.skry();
         }
+    }
+
+    public void pridajHp(float kolko) {
+        this.hpBar.pridajHp(kolko);
+        this.zobraz();
     }
 
     public boolean jeZivy() {
@@ -122,4 +136,17 @@ public abstract class Postava extends HernyObjekt {
     public boolean getUtoci() {
         return utoci;
     }
+
+    public float getHp() {
+        return hpBar.getHp();
+    }
+
+    public float getSila() {
+        return sila;
+    }
+
+    public void setSila(float sila) {
+        this.sila = sila;
+    }
+
 }

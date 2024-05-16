@@ -7,7 +7,7 @@ import java.util.Random;
 public class Golem extends Postava implements IMonstrum {
     private Postava hrac;
     public Golem(int pocetObrazkov, String cestaKObrazku, int x, int y, Postava hrac) {
-        super(pocetObrazkov, cestaKObrazku + "0", x, y);
+        super(pocetObrazkov, cestaKObrazku + "0", x, y, 5);
         this.hrac = hrac;
     }
 
@@ -16,10 +16,11 @@ public class Golem extends Postava implements IMonstrum {
         Random rand = new Random();
         int nahoda = rand.nextInt(100);
         if (nahoda <= 10) {
-            postava.uberHp(10);
+            super.setSila(10);
         } else {
-            postava.uberHp(5);
+            super.setSila(5);
         }
+        postava.uberHp(super.getSila());
     }
 
     public void tik() {
