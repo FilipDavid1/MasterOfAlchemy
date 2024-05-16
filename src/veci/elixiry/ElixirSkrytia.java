@@ -1,6 +1,7 @@
 package veci.elixiry;
 
 import prekazky.postavy.Postava;
+import prekazky.postavy.hrac.Hrac;
 import veci.ingrediencie.Ingrediencie;
 
 public class ElixirSkrytia extends Elixir {
@@ -12,5 +13,7 @@ public class ElixirSkrytia extends Elixir {
     @Override
     public void pouzi(Postava postava) {
         // TODO: enemy nemozu utocit na postavu 5s
+        Hrac hrac = (Hrac)postava;
+        hrac.getVybrataPostava().setSila(0.0f, 5);
     }
 }

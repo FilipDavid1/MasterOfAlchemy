@@ -18,12 +18,18 @@ public abstract class Postava extends HernyObjekt {
 
     private float sila;
 
+    private final float originalnaSila;
+
+    private boolean jeOtraveny = false;
+
 
     public Postava(int pocetObrazkov, String cestaKObrazku, int x, int y, int sila) {
         super(pocetObrazkov, cestaKObrazku, x, y);
         this.orientacia = OrientaciaPostavy.DOWN;
-        this.hpBar = new HpBar(x - 20, y - 10);
+        this.hpBar = new HpBar(x - 20 , y - 15);
+        System.out.println(super.getSirka() + "  " + super.getVyska() + "  " + cestaKObrazku + "  " + x + "  " + y);
         this.sila = sila;
+        this.originalnaSila = sila;
     }
 
     public abstract void interakcia(Postava postava);
@@ -49,11 +55,21 @@ public abstract class Postava extends HernyObjekt {
             animacia = 0;
         }
         super.zmenObrazok(  imgNazov + animacia + ".png");
+
+        if (casOslabenia > 0 && jeOtraveny) {
+            casOslabenia = casOslabenia - 200;
+        } else {
+            this.jeOtraveny = false;
+        }
+
+        if (this.jeOtraveny) {
+            this.hpBar.uberHp(0.5f);
+        }
     }
 
     public void posunNa(int x, int y) {
-        super.setX(x, super.getObrazok(), hpBar);
-        super.setY(y, super.getObrazok(), hpBar);
+        super.setX(x, super.getObrazok(), hpBar, super.getData());
+        super.setY(y, super.getObrazok(), hpBar, super.getData());
     }
 
     public void skry() {
@@ -94,8 +110,8 @@ public abstract class Postava extends HernyObjekt {
         this.zobraz();
     }
 
-    public boolean jeZivy() {
-        return this.hpBar.getHp() > 0;
+    public boolean jeMrtvy() {
+        return this.hpBar.getHp() <= 0;
     }
 
 
@@ -105,14 +121,21 @@ public abstract class Postava extends HernyObjekt {
             animacia = 0;
         }
         super.zmenObrazok(  imgNazov + animacia + ".png");
+
+        if (casOslabenia > 0) {
+            casOslabenia = casOslabenia - 200;
+        } else {
+            this.sila = originalnaSila;
+            this.jeOtraveny = false;
+        }
+
+        if (this.jeOtraveny) {
+            this.hpBar.uberHp(0.5f);
+        }
     }
 
     public float getSpeed() {
         return speed;
-    }
-
-    public void setSpeed(float speed) {
-        this.speed = speed;
     }
 
     public void oslabenie(int sekundy) {
@@ -149,4 +172,13 @@ public abstract class Postava extends HernyObjekt {
         this.sila = sila;
     }
 
+    public void setSila(float sila, int cas) {
+        this.sila = sila;
+        this.casOslabenia = cas * 1000;
+    }
+
+    public void otrav(int i) {
+        this.casOslabenia = i * 1000;
+        this.jeOtraveny = true;
+    }
 }
