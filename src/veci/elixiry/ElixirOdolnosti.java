@@ -1,6 +1,7 @@
 package veci.elixiry;
 
 import prekazky.postavy.Postava;
+import prekazky.postavy.hrac.Hrac;
 import veci.ingrediencie.Ingrediencie;
 
 public class ElixirOdolnosti extends Elixir {
@@ -13,5 +14,7 @@ public class ElixirOdolnosti extends Elixir {
     @Override
     public void pouzi(Postava postava) {
         // TODO: zniz damage enemy
+        Hrac hrac = (Hrac)postava;
+        hrac.getVybrataPostava().setSila(hrac.getVybrataPostava().getSila() * 0.9f);
     }
 }
