@@ -1,6 +1,6 @@
 package prekazky;
 
-import fri.shapesge.Kruh;
+import fri.shapesge.Obrazok;
 import prekazky.postavy.Postava;
 
 import static java.lang.Math.sqrt;
@@ -12,14 +12,19 @@ public class Strela {
 
     private double dlzka;
 
-    private Kruh kruh;
+    private Obrazok kruh;
 
-    public Strela(float x, float y, float rychlost) {
+    private int animacia = 0;
+
+    private String cestaKObrazku;
+
+    public Strela(float x, float y, float rychlost, String cestaKObrazku) {
         this.x = x;
         this.y = y;
         this.rychlost = rychlost;
-        this.kruh = new Kruh();
-        this.kruh.zmenPriemer(10);
+        this.cestaKObrazku = cestaKObrazku;
+        this.kruh = new Obrazok(cestaKObrazku + "/tile000.png");
+//        this.kruh.zmenPriemer(10);
         this.kruh.zmenPolohu((int)x, (int)y);
     }
 
@@ -35,7 +40,6 @@ public class Strela {
         y += normDy * rychlost;
         this.kruh.zmenPolohu((int)x, (int)y);
         this.kruh.zobraz();
-
     }
 
     public double getDlzka() {
@@ -44,6 +48,20 @@ public class Strela {
 
     public void skry() {
         this.kruh.skry();
+    }
+
+    public void strelaAnimacia(int pocetObrazkov) {
+        animacia++;
+        if (animacia >= pocetObrazkov) {
+            animacia = 0;
+        }
+
+        if (animacia < 10)  {
+            this.kruh.zmenObrazok(this.cestaKObrazku + "/tile00" + animacia + ".png");
+        } else {
+            this.kruh.zmenObrazok(this.cestaKObrazku + "/tile0" + animacia + ".png");
+        }
+
     }
 }
 
