@@ -1,27 +1,20 @@
-typ: npc
-meno: Alchymista
-pocetObrazkov: 1
-cestaKObrazku: resources/Obrazky/Monstra/LadovyGolem/Idle/idle_
-x: 505
-y: 400
-
 typ: monstrum
 meno: Drak
-pocetObrazkov: 5
+pocetObrazkov: 6
 cestaKObrazku: resources/Obrazky/Monstra/Drak/Idle/Idle_
 x: 50
 y: 60
 
 typ: monstrum
 meno: Drak
-pocetObrazkov: 5
+pocetObrazkov: 6
 cestaKObrazku: resources/Obrazky/Monstra/Drak/Idle/Idle_
 x: 500
 y: 60
 
 typ: monstrum
 meno: Drak
-pocetObrazkov: 5
+pocetObrazkov: 6
 cestaKObrazku: resources/Obrazky/Monstra/Drak/Idle/Idle_
 x: 70
 y: 300
@@ -53,3 +46,45 @@ pocetObrazkov: 6
 cestaKObrazku: resources/Obrazky/Monstra/Demon/demon_idle_
 x: 1700
 y: 1300
+
+typ: monstrum
+meno: Goblin
+pocetObrazkov: 5
+cestaKObrazku: resources/Obrazky/Monstra/Goblin/Attack_
+x: 500
+y: 160
+
+typ: monstrum
+meno: Goblin
+pocetObrazkov: 5
+cestaKObrazku: resources/Obrazky/Monstra/Goblin/Attack_
+x: 700
+y: 1300
+
+typ: monstrum
+meno: Goblin
+pocetObrazkov: 5
+cestaKObrazku: resources/Obrazky/Monstra/Goblin/Attack_
+x: 900
+y: 300
+
+typ: monstrum
+meno: Goblin
+pocetObrazkov: 5
+cestaKObrazku: resources/Obrazky/Monstra/Goblin/Attack_
+x: 450
+y: 450
+
+typ: monstrum
+meno: Skeleton
+pocetObrazkov: 11
+cestaKObrazku: resources/Obrazky/Monstra/Skeleton/Idle/Idle_
+x: 900
+y: 600
+
+typ: monstrum
+meno: Skeleton
+pocetObrazkov: 11
+cestaKObrazku: resources/Obrazky/Monstra/Skeleton/Idle/Idle_
+x: 450
+y: 950
