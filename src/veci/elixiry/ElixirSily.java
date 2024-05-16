@@ -12,5 +12,6 @@ public class ElixirSily extends Elixir {
     @Override
     public void pouzi(Postava postava) {
         // TODO: zvys silu postavy
+        postava.setSila(postava.getSila() + 0.2f);
     }
 }
