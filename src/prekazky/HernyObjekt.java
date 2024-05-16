@@ -4,12 +4,12 @@ import fri.shapesge.DataObrazku;
 import fri.shapesge.Obrazok;
 
 public class HernyObjekt extends HernaEntita {
-    private int pocetObrazkov;
-    private String cestaKObrazku;
+    private final int pocetObrazkov;
+    private final String cestaKObrazku;
 
     private Obrazok obrazok;
 
-    private DataObrazku data;
+    private final DataObrazku data;
 
     public HernyObjekt(int pocetObrazkov, String cestaKObrazku, int x, int y) {
         this.pocetObrazkov = pocetObrazkov;

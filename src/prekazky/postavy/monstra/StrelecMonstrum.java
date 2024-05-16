@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 public abstract class StrelecMonstrum extends Postava implements IMonstrum {
 
-    private Postava hrac;
+    private final Postava hrac;
     private ArrayList<Strela> strely;
 
-    private int pocetObrazkovStrely;
+    private final int pocetObrazkovStrely;
 
     public StrelecMonstrum(int pocetObrazkov, String cestaKObrazku, int x, int y, int sila, Postava hrac, int pocetObrazkovStrely) {
         super(pocetObrazkov, cestaKObrazku + "0", x, y, sila);

@@ -8,7 +8,7 @@ public abstract class Postava extends HernyObjekt {
 
     private OrientaciaPostavy orientacia;
 
-    private HpBar hpBar;
+    private final HpBar hpBar;
 
     private float speed = 0.7f;
 

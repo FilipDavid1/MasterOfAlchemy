@@ -10,8 +10,8 @@ import javax.swing.JOptionPane;
 import java.lang.reflect.Constructor;
 
 public class Alchymista extends Postava {
-    private String[] elixiry = {"ElixirEnergie", "ElixirMoci", "ElixirMudrosti", "ElixirObnovenia", "ElixirObrany", "ElixirOdolnosti", "ElixirOdstraneniaKliadby", "ElixirOzivenia", "ElixirRegeneracie", "ElixirRychlosti", "ElixirSily", "ElixirSkrytia"};
-    private BlokTextu blokTextu;
+    private final String[] elixiry = {"ElixirEnergie", "ElixirMoci", "ElixirMudrosti", "ElixirObnovenia", "ElixirObrany", "ElixirOdolnosti", "ElixirOdstraneniaKliadby", "ElixirOzivenia", "ElixirRegeneracie", "ElixirRychlosti", "ElixirSily", "ElixirSkrytia"};
+    private final BlokTextu blokTextu;
     public Alchymista(int pocetObrazkov, String cestaKObrazku, int x, int y, Postava hrac) {
         super(pocetObrazkov, cestaKObrazku + "0", x, y, 0);
         this.blokTextu = new BlokTextu("", 0, 30);
@@ -25,7 +25,7 @@ public class Alchymista extends Postava {
         for (String elixir : this.elixiry) {
             elixiryNaNovychRiadkoch.append(elixir).append("\n");
         }
-        this.blokTextu.zmenText("Ponukane elixiry: \n" + elixiryNaNovychRiadkoch.toString());
+        this.blokTextu.zmenText("Ponukane elixiry: \n" + elixiryNaNovychRiadkoch);
         this.blokTextu.zmenFarbu("white");
         this.blokTextu.zobraz();
 

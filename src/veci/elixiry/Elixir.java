@@ -60,7 +60,7 @@ public abstract class Elixir implements IVec {
     public abstract void pouzi(Postava postava);
 
     public ArrayList<String> getPotrebneIngredience() {
-        return new ArrayList<String>() {{
+        return new ArrayList<>() {{
                 for (Ingrediencie i : potrebneIngredience) {
                     add(i.getNazov());
                 }

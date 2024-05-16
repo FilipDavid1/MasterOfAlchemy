@@ -4,10 +4,6 @@ import prekazky.postavy.Postava;
 public class Skeleton extends Postava implements IMonstrum {
     private int pocetBarier;
 
-    private boolean utokVykonal = false;
-
-    private int casovac = 0;
-
     public Skeleton(int pocetObrazkov, String cestaKObrazku, int x, int y, Postava hrac) {
         super(pocetObrazkov, cestaKObrazku + "0", x, y, 10);
         this.pocetBarier = 3;

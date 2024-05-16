@@ -8,15 +8,15 @@ import static java.lang.Math.sqrt;
 public class Strela {
     private float x;
     private float y;
-    private float rychlost;
+    private final float rychlost;
 
     private double dlzka;
 
-    private Obrazok kruh;
+    private final Obrazok kruh;
 
     private int animacia = 0;
 
-    private String cestaKObrazku;
+    private final String cestaKObrazku;
 
     public Strela(float x, float y, float rychlost, String cestaKObrazku) {
         this.x = x;

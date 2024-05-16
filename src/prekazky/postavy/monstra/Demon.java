@@ -5,7 +5,7 @@ import prekazky.postavy.Postava;
 import java.util.Random;
 
 public class Demon extends Postava implements IMonstrum {
-    private Postava hrac;
+    private final Postava hrac;
 
     public Demon(int pocetObrazkov, String cestaKObrazku, int x, int y, Postava hrac) {
         super(pocetObrazkov, cestaKObrazku + "0", x, y, 5);

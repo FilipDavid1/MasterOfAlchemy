@@ -5,10 +5,9 @@ import prekazky.postavy.Postava;
 import java.util.Random;
 
 public class Golem extends Postava implements IMonstrum {
-    private Postava hrac;
+
     public Golem(int pocetObrazkov, String cestaKObrazku, int x, int y, Postava hrac) {
         super(pocetObrazkov, cestaKObrazku + "0", x, y, 5);
-        this.hrac = hrac;
     }
 
     @Override
