@@ -88,3 +88,17 @@ pocetObrazkov: 11
 cestaKObrazku: resources/Obrazky/Monstra/Skeleton/Idle/Idle_
 x: 450
 y: 950
+
+typ: monstrum
+meno: Hribik
+pocetObrazkov: 3
+cestaKObrazku: resources/Obrazky/Monstra/Hribik/Attack_
+x: 100
+y: 230
+
+typ: monstrum
+meno: Hribik
+pocetObrazkov: 3
+cestaKObrazku: resources/Obrazky/Monstra/Hribik/Attack_
+x: 930
+y: 1150
