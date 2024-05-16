@@ -19,6 +19,6 @@ public class Drak extends StrelecMonstrum {
 
     @Override
     public void interakcia(Postava postava) {
-        super.pridajStrelu(new Strela(super.getX() + (super.getSirka() / 2), super.getY() + (super.getVyska() / 2), 10, "resources/Obrazky/strela/Drak"));
+        super.pridajStrelu(new Strela(super.getX() + 10, super.getY() + 20, 10, "resources/Obrazky/strela/Drak"));
     }
 }

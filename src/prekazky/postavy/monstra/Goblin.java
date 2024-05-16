@@ -6,6 +6,7 @@ import prekazky.postavy.Postava;
 public class Goblin extends StrelecMonstrum {
     public Goblin(int pocetObrazkov, String cestaKObrazku, int x, int y, Postava hrac) {
         super(pocetObrazkov, cestaKObrazku, x, y, 1, hrac, 19);
+//        super.posunHpBar(x + 5, y + 20);
     }
 
     @Override
@@ -19,6 +20,6 @@ public class Goblin extends StrelecMonstrum {
 
     @Override
     public void interakcia(Postava postava) {
-        super.pridajStrelu(new Strela(super.getX() + 20 , super.getY() + 15, 8, "resources/Obrazky/strela/Goblin"));
+        super.pridajStrelu(new Strela(super.getX() - 10, super.getY() - 15, 8, "resources/Obrazky/strela/Goblin"));
     }
 }
