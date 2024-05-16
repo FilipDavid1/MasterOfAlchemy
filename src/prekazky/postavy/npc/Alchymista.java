@@ -5,10 +5,7 @@ import fri.shapesge.StylFontu;
 import prekazky.postavy.Postava;
 import prekazky.postavy.hrac.Hrac;
 import prekazky.postavy.hrac.Inventar;
-import veci.IVec;
 import veci.elixiry.Elixir;
-import veci.ingrediencie.Ingrediencie;
-
 import javax.swing.JOptionPane;
 import java.lang.reflect.Constructor;
 

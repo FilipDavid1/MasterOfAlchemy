@@ -13,22 +13,44 @@ public class Inventar<E extends IVec> {
 
     private Obrazok inventarElixiryObrazok;
 
+    private Elixir[] elixiry;
+
+
     public Inventar() {
         this.veci = new ArrayList<>();
         this.inventarObrazok = new Obrazok("resources/Obrazky/Hrac/inventory.png");
         this.inventarElixiryObrazok = new Obrazok("resources/Obrazky/Hrac/inventory_potions.png");
-        this.inventarElixiryObrazok.zmenPolohu(408, 700);
+        this.inventarElixiryObrazok.zmenPolohu(408, 750);
         this.inventarElixiryObrazok.zobraz();
+        this.elixiry = new Elixir[10];
         this.zobrazElixiry();
     }
 
     public void pridajVec(E vec) {
-        this.veci.add(vec);
+        if (vec instanceof Elixir) {
+            for (int i = 0; i < this.elixiry.length; i++) {
+                if (this.elixiry[i] == null) {
+                    this.elixiry[i] = (Elixir)vec;
+                    break;
+                }
+            }
+        } else {
+            this.veci.add(vec);
+        }
         this.zobrazElixiry();
     }
 
     public void odstranVec(IVec vec) {
-        this.veci.remove(vec);
+        if (vec instanceof Elixir) {
+            for (int i = 0; i < this.elixiry.length; i++) {
+                if (this.elixiry[i] == vec) {
+                    this.elixiry[i] = null;
+                    break;
+                }
+            }
+        } else {
+            this.veci.remove(vec);
+        }
     }
 
     public void odstranVeci(ArrayList<String> veci) {
@@ -43,19 +65,19 @@ public class Inventar<E extends IVec> {
     }
 
     public void zobrazElixiry() {
-        ArrayList<E> elixiry = new ArrayList<>();
-        for (E vec : this.veci) {
-            if (vec instanceof Elixir) {
-                elixiry.add(vec);
-            }
-        }
+        int zaciatokX = 450;
+        int medzera = 60;
+
         for (int i = 0; i < 10; i++) {
-            if (i < elixiry.size()) {
-                elixiry.get(i).getObrazok().zmenPolohu(410 + ((i + 1) * 55) - elixiry.get(i).getSirka(), 750);
-                elixiry.get(i).getObrazok().zobraz();
+            if (i < elixiry.length && elixiry[i] != null) {
+                int poziciaX = zaciatokX + i * medzera;
+                elixiry[i].getObrazok().zmenPolohu(poziciaX, 790);
+                elixiry[i].zobrazText(poziciaX - 15, 830);
+                elixiry[i].getObrazok().zobraz();
             }
         }
     }
+
 
     public void zobrazIngrediencieVInventari() {
         this.inventarObrazok.zmenPolohu(500, 200);
@@ -105,5 +127,14 @@ public class Inventar<E extends IVec> {
 
     public ArrayList<E> getVeciList() {
         return this.veci;
+    }
+
+    public void pouziElixir(int index, Hrac hrac) {
+        if (index < this.elixiry.length && this.elixiry[index] != null) {
+            System.out.println(index);
+            this.elixiry[index].pouzi(hrac);
+            this.elixiry[index].skry();
+            this.elixiry[index] = null;  // Odstráni elixír zo zoznamu po jeho použití
+        }
     }
 }

@@ -17,6 +17,8 @@ public class Interakcia {
     private BlokTextu blokTextu;
     private boolean jeZobrazeny;
     private int casovac;
+
+    private BlokTextu hp;
     public Interakcia(Mapa mapa, Inventar inventar, Hrac hrac) {
         this.mapa = mapa;
         this.inventar = inventar;
@@ -25,6 +27,10 @@ public class Interakcia {
         this.blokTextu.zmenFarbu("white");
         this.blokTextu.zmenFont("Courier New", StylFontu.BOLD, 15);
         this.casovac = 10;
+        this.hp = new BlokTextu("HP: " + hrac.getHp(), 0, 50);
+        this.hp.zmenFont("Courier New", StylFontu.BOLD, 15);
+        this.hp.zmenFarbu("white");
+        this.hp.zobraz();
     }
 
     public void tik() {
@@ -36,6 +42,8 @@ public class Interakcia {
             this.jeZobrazeny = false;
             this.blokTextu.skry();
         }
+        this.hp.zmenText("HP: " + hrac.getHp());
+        this.hp.zobraz();
     }
 
 

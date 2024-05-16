@@ -27,9 +27,9 @@ public abstract class Elixir implements IVec {
         this.potrebneIngredience = potrebneIngredience;
         this.obrazok = new Obrazok("resources/Obrazky/Elixiry/" + nazov + ".png");
         this.data = new DataObrazku("resources/Obrazky/Elixiry/" + nazov + ".png");
-        this.blokTextu = new BlokTextu(nazov);
+        this.blokTextu = new BlokTextu(nazov.substring(6));
         this.blokTextu.zmenFarbu("white");
-        this.blokTextu.zmenFont("Courier New", StylFontu.BOLD, 7);
+        this.blokTextu.zmenFont("Courier New", StylFontu.BOLD, 9);
     }
 
     @Override
