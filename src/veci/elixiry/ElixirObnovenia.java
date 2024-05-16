@@ -12,5 +12,6 @@ public class ElixirObnovenia extends Elixir {
     @Override
     public void pouzi(Postava postava) {
         // TODO: obnov 20% zivotov postavy
+        postava.pridajHp(postava.getHp() * 0.2f);
     }
 }
