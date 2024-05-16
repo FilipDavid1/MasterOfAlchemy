@@ -13,5 +13,6 @@ public class ElixirMoci extends Elixir {
     @Override
     public void pouzi(Postava postava) {
         // TODO: zvys silu postavy
+        postava.setSila(postava.getSila() * 1.1f);
     }
 }
