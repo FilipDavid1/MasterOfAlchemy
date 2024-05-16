@@ -12,5 +12,8 @@ public class ElixirOzivenia extends Elixir {
     @Override
     public void pouzi(Postava postava) {
         // TODO: ak je postava mrtva, oziv ju
+        if (postava.getHp() <= 0) {
+            postava.pridajHp(100);
+        }
     }
 }
