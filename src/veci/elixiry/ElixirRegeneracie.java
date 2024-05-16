@@ -1,6 +1,7 @@
 package veci.elixiry;
 
 import prekazky.postavy.Postava;
+import prekazky.postavy.hrac.Hrac;
 import veci.ingrediencie.Ingrediencie;
 
 public class ElixirRegeneracie extends Elixir {
@@ -12,5 +13,7 @@ public class ElixirRegeneracie extends Elixir {
     @Override
     public void pouzi(Postava postava) {
         // TODO: regeneruj 5hp postavy na 5 sekund
+        Hrac hrac = (Hrac)postava;
+        hrac.regenerujHp(5);
     }
 }
