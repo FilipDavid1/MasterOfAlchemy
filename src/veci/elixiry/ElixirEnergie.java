@@ -14,6 +14,7 @@ public class ElixirEnergie extends Elixir {
     @Override
     public void pouzi(Postava postava) {
         // TODO: zvys rychlost postavy na urcity cas
+        postava.setSpeed(postava.getSpeed() * 1.1f);
     }
 
 }
