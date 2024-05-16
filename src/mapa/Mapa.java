@@ -2,8 +2,7 @@ package mapa;
 
 import prekazky.HernyObjekt;
 import prekazky.postavy.Postava;
-import prekazky.postavy.monstra.Drak;
-import prekazky.postavy.monstra.Goblin;
+import prekazky.postavy.monstra.StrelecMonstrum;
 import prekazky.postavy.npc.Alchymista;
 import veci.ingrediencie.Ingrediencia;
 import veci.ingrediencie.Ingrediencie;
@@ -144,8 +143,8 @@ public class Mapa {
     public void posunHerneObjekty(int x, int y) {
         for (HernyObjekt hernyObjekt : this.prekazky) {
             if (hernyObjekt instanceof Postava) {
-                Postava drak = (Postava)hernyObjekt;
-                drak.posunNa(drak.getX() + x, drak.getY() + y);
+                Postava postava = (Postava)hernyObjekt;
+                postava.posunNa(postava.getX() + x, postava.getY() + y);
             } else {
                 hernyObjekt.setX(hernyObjekt.getX() + x);
                 hernyObjekt.setY(hernyObjekt.getY() + y);
@@ -164,12 +163,8 @@ public class Mapa {
         for (HernyObjekt prekazka : this.prekazky) {
             if (prekazka instanceof Postava postava) {
                 if (!postava.jeZivy()) {
-                    if (postava instanceof Goblin) {
-                        Goblin monster = (Goblin)postava;
-                        monster.zmazStrely();
-                    } else if (postava instanceof Drak) {
-                        Drak monster = (Drak)postava;
-                        monster.zmazStrely();
+                    if (postava instanceof StrelecMonstrum strelec) {
+                        strelec.zmazStrely();
                     }
 
                     mrtvePrekazky.add(prekazka);

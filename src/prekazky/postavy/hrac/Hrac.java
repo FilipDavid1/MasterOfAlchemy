@@ -6,11 +6,7 @@ import prekazky.postavy.OrientaciaPostavy;
 import prekazky.postavy.Postava;
 import prekazky.postavy.monstra.IMonstrum;
 import prekazky.postavy.monstra.Skeleton;
-import veci.elixiry.ElixirMoci;
-import veci.elixiry.ElixirOzivenia;
-import veci.elixiry.ElixirOdolnosti;
-import veci.elixiry.ElixirObnovenia;
-import veci.elixiry.ElixirRegeneracie;
+import veci.elixiry.*;
 import veci.ingrediencie.Ingrediencia;
 import veci.IVec;
 import fri.shapesge.Kruh;
@@ -20,15 +16,11 @@ public class Hrac extends Postava {
     private final Mapa mapa;
     private final Kruh kruh;
     private Inventar inventar;
-
-
     private Interakcia interakcia;
-
     private Postava vybrataPostava;
-
     private int casRegeneracie;
 
-    public Hrac(int pocetObrazkovIdle, int pocetObrazkovWalk, String nazov, int x, int y, Mapa mapa, Manazer manazer) {
+    public Hrac(int pocetObrazkovIdle, String nazov, int x, int y, Mapa mapa, Manazer manazer) {
         super(pocetObrazkovIdle, nazov, x, y, 10);
         this.mapa = mapa;
         this.kruh = new Kruh();
@@ -44,6 +36,8 @@ public class Hrac extends Postava {
         this.inventar.pridajVec(new ElixirOdolnosti("ElixirOdolnosti"));
         this.inventar.pridajVec(new ElixirOzivenia("ElixirOzivenia"));
         this.inventar.pridajVec(new ElixirRegeneracie("ElixirRegeneracie"));
+        this.inventar.pridajVec(new ElixirSkrytia("ElixirSkrytia"));
+        this.inventar.pridajVec(new ElixirJedu("ElixirJedu"));
 
 
     }

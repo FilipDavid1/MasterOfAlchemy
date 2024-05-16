@@ -70,4 +70,8 @@ public class HernyObjekt extends HernaEntita {
     public void zobrazObrazok() {
         this.obrazok.zobraz();
     }
+
+    public DataObrazku getData() {
+        return data;
+    }
 }

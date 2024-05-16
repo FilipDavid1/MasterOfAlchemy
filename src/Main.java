@@ -17,7 +17,7 @@ public class Main {
 //        manazer.spravujObjekt(prekazka);
 
 
-        Hrac hrac = new Hrac(4, 8, "resources/Obrazky/Hrac/Idle/Idle_Down_0", 725, 450, mapa, manazer);
+        Hrac hrac = new Hrac(4, "resources/Obrazky/Hrac/Idle/Idle_Down_0", 725, 450, mapa, manazer);
         manazer.spravujObjekt(hrac);
         mapa.setHrac(hrac);
         NacitavaniePrekazok nacitavaniePrekazok = new NacitavaniePrekazok(mapa, manazer);

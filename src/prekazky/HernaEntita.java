@@ -1,5 +1,6 @@
 package prekazky;
 
+import fri.shapesge.DataObrazku;
 import prekazky.postavy.HpBar;
 import fri.shapesge.BlokTextu;
 import fri.shapesge.Obrazok;
@@ -28,16 +29,16 @@ public class HernaEntita {
         obrazok.zobraz();
     }
 
-    public void setX(int x, Obrazok obrazok, HpBar hpBar) {
+    public void setX(int x, Obrazok obrazok, HpBar hpBar, DataObrazku dataObrazku) {
         this.x = x;
-        hpBar.posunNa(x, hpBar.getY());
+        hpBar.posunNa(x - 5 , y - (dataObrazku.getVyska() / 10));
         obrazok.zmenPolohu(x, y);
         obrazok.zobraz();
     }
 
-    public void setY(int y, Obrazok obrazok, HpBar hpBar) {
+    public void setY(int y, Obrazok obrazok, HpBar hpBar, DataObrazku dataObrazku) {
         this.y = y;
-        hpBar.posunNa(hpBar.getX(), y);
+        hpBar.posunNa(x - 5 , y - (dataObrazku.getVyska() / 10));
         obrazok.zmenPolohu(x, y);
         obrazok.zobraz();
     }
