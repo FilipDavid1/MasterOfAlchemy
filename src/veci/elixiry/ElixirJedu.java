@@ -1,20 +1,22 @@
 package veci.elixiry;
 
 import prekazky.postavy.Postava;
+import prekazky.postavy.hrac.Hrac;
 import veci.ingrediencie.Ingrediencie;
 
-public class ElixirEnergie extends Elixir {
+public class ElixirJedu extends Elixir {
 
     private static final Ingrediencie[] POTREBNE_INGREDIENCIE = {Ingrediencie.AmadamovyList, Ingrediencie.Ashwagandha, Ingrediencie.Obilie};
 
-    public ElixirEnergie(String nazov) {
+    public ElixirJedu(String nazov) {
         super(nazov, POTREBNE_INGREDIENCIE);
     }
 
     @Override
     public void pouzi(Postava postava) {
-        // TODO: zvys rychlost postavy na urcity cas
-        postava.setSpeed(postava.getSpeed() * 1.1f);
+        // TODO: postava sa otravi
+        Hrac hrac = (Hrac)postava;
+        hrac.getVybrataPostava().otrav(10);
     }
 
 }
