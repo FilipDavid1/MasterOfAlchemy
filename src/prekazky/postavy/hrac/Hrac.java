@@ -6,7 +6,13 @@ import prekazky.postavy.OrientaciaPostavy;
 import prekazky.postavy.Postava;
 import prekazky.postavy.monstra.IMonstrum;
 import prekazky.postavy.monstra.Skeleton;
-import veci.elixiry.*;
+import veci.elixiry.ElixirJedu;
+import veci.elixiry.ElixirMoci;
+import veci.elixiry.ElixirOdolnosti;
+import veci.elixiry.ElixirOzivenia;
+import veci.elixiry.ElixirRegeneracie;
+import veci.elixiry.ElixirSkrytia;
+import veci.elixiry.ElixirObnovenia;
 import veci.ingrediencie.Ingrediencia;
 import veci.IVec;
 import fri.shapesge.Kruh;
@@ -118,7 +124,7 @@ public class Hrac extends Postava {
             this.idleAnimacia(  super.getCestaKObrazku().replace("Down_0", "") + super.getOrientacia() + "_");
         }
 
-        if (super.getCasOslabenia() > 0) {
+        if (super.getCasOslabenia() > 0 && !super.getJeOtraveny()) {
             super.oslabenie((super.getCasOslabenia() / 1000) - 1);
         }
 

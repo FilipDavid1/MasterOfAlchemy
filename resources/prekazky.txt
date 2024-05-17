@@ -79,7 +79,7 @@ typ: monstrum
 meno: Skeleton
 pocetObrazkov: 11
 cestaKObrazku: resources/Obrazky/Monstra/Skeleton/Idle/Idle_
-x: 900
+x: 1900
 y: 600
 
 typ: monstrum
@@ -102,3 +102,17 @@ pocetObrazkov: 3
 cestaKObrazku: resources/Obrazky/Monstra/Hribik/Attack_
 x: 930
 y: 1150
+
+typ: monstrum
+meno: Mag
+pocetObrazkov: 8
+cestaKObrazku: resources/Obrazky/Monstra/Mag/Idle/Idle_
+x: 900
+y: 750
+
+typ: monstrum
+meno: Mag
+pocetObrazkov: 8
+cestaKObrazku: resources/Obrazky/Monstra/Mag/Idle/Idle_
+x: 800
+y: 150

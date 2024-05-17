@@ -22,6 +22,8 @@ public abstract class Postava extends HernyObjekt {
 
     private boolean jeOtraveny = false;
 
+    private float ubraneneZivoty = 0;
+
 
     public Postava(int pocetObrazkov, String cestaKObrazku, int x, int y, int sila) {
         super(pocetObrazkov, cestaKObrazku, x, y);
@@ -63,7 +65,7 @@ public abstract class Postava extends HernyObjekt {
         }
 
         if (this.jeOtraveny) {
-            this.hpBar.uberHp(0.5f);
+            this.hpBar.uberHp(ubraneneZivoty);
         }
     }
 
@@ -177,8 +179,19 @@ public abstract class Postava extends HernyObjekt {
         this.casOslabenia = cas * 1000;
     }
 
-    public void otrav(int i) {
-        this.casOslabenia = i * 1000;
+    public void otrav(int cas) {
+        this.casOslabenia = cas * 1000;
         this.jeOtraveny = true;
+        this.ubraneneZivoty = 0.5f;
+    }
+
+    public void otrav(int cas, int zivoty) {
+        this.casOslabenia = cas * 1000;
+        this.jeOtraveny = true;
+        this.ubraneneZivoty = zivoty;
+    }
+
+    protected boolean getJeOtraveny() {
+        return jeOtraveny;
     }
 }
