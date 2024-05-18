@@ -1,6 +1,9 @@
 package prekazky.postavy;
 
+import fri.shapesge.BlokTextu;
+import fri.shapesge.StylFontu;
 import prekazky.HernyObjekt;
+import prekazky.postavy.hrac.Hrac;
 
 public abstract class Postava extends HernyObjekt {
     private int animacia;
@@ -24,6 +27,8 @@ public abstract class Postava extends HernyObjekt {
 
     private float ubraneneZivoty = 0;
 
+    private BlokTextu meno;
+
 
     public Postava(int pocetObrazkov, String cestaKObrazku, int x, int y, int sila) {
         super(pocetObrazkov, cestaKObrazku, x, y);
@@ -32,6 +37,10 @@ public abstract class Postava extends HernyObjekt {
         System.out.println(super.getSirka() + "  " + super.getVyska() + "  " + cestaKObrazku + "  " + x + "  " + y);
         this.sila = sila;
         this.originalnaSila = sila;
+        this.meno = new BlokTextu(this.getClass().getSimpleName(), x, y - 20);
+        this.meno.zmenFont("Courier New", StylFontu.BOLD, 15);
+        this.meno.zmenFarbu("white");
+        this.meno.zobraz();
     }
 
     public abstract void interakcia(Postava postava);
@@ -72,6 +81,9 @@ public abstract class Postava extends HernyObjekt {
     public void posunNa(int x, int y) {
         super.setX(x, super.getObrazok(), hpBar, super.getData());
         super.setY(y, super.getObrazok(), hpBar, super.getData());
+        if (!(this instanceof Hrac)) {
+            this.meno.zmenPolohu(x - 20, y - 20);
+        }
     }
 
     public void skry() {
@@ -193,5 +205,10 @@ public abstract class Postava extends HernyObjekt {
 
     protected boolean getJeOtraveny() {
         return jeOtraveny;
+    }
+
+    public void setMeno(String s, int x, int y) {
+        this.meno.zmenPolohu(x, y);
+        this.meno.zmenText(s);
     }
 }

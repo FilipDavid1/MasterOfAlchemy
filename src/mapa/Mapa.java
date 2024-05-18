@@ -2,11 +2,11 @@ package mapa;
 
 import prekazky.HernyObjekt;
 import prekazky.postavy.Postava;
+import prekazky.postavy.monstra.IMonstrum;
 import prekazky.postavy.monstra.StrelecMonstrum;
 import prekazky.postavy.npc.Alchymista;
 import veci.ingrediencie.Ingrediencia;
 import veci.ingrediencie.Ingrediencie;
-import fri.shapesge.DataObrazku;
 import fri.shapesge.Manazer;
 import fri.shapesge.Obrazok;
 
@@ -120,13 +120,16 @@ public class Mapa {
         this.prekazky.add(prekazka);
         prekazka.setX(prekazka.getX() + this.x);
         prekazka.setY(prekazka.getY() + this.y);
-        System.out.println(prekazka.getX() + " " + prekazka.getY());
+        if (prekazka instanceof Postava postava) {
+            if (postava instanceof IMonstrum) {
+                postava.setMeno("Monstrum: " + postava.getClass().getSimpleName(), postava.getX() - 20, postava.getY() - 20);
+            }
+        }
     }
 
     public void pridajPrekazky(List<HernyObjekt> prekazky) {
         for (HernyObjekt prekazka : prekazky) {
             this.pridajPrekazku(prekazka);
-            System.out.println(prekazka.getX() + " " + prekazka.getY());
         }
     }
 

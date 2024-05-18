@@ -12,14 +12,14 @@ public class Mag extends Postava implements IMonstrum {
     @Override
     public void interakcia(Postava postava) {
         Random rand = new Random();
-        postava.otrav(rand.nextInt(3), rand.nextInt(5));
+        postava.otrav((rand.nextInt(3) + 1), rand.nextInt(5));
     }
 
 
     @Override
     public void tik() {
         if (super.getUtoci()) {
-            super.attackAnimacia(super.getCestaKObrazku().replace("Idle/Idle_0", "Attack/Attack_"), 13);
+            super.attackAnimacia(super.getCestaKObrazku().replace("Idle/Idle_0", "Attack/Attack_"), 8);
         } else {
             super.idleAnimacia(super.getCestaKObrazku().replace("0", ""));
         }
