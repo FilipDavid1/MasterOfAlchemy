@@ -13,4 +13,9 @@ public class ElixirMudrosti extends Elixir {
     public void pouzi(Postava postava) {
         // TODO: Implement this method
     }
+
+    @Override
+    public String popisElixira() {
+        return "Zvýši inteligenciu postavy o 10%.";
+    }
 }

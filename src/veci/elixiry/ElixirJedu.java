@@ -19,4 +19,9 @@ public class ElixirJedu extends Elixir {
         hrac.getVybrataPostava().otrav(10);
     }
 
+    @Override
+    public String popisElixira() {
+        return "Otrávi vybranú postavu na 10 sekúnd.";
+    }
+
 }

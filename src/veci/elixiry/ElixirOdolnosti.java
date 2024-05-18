@@ -17,4 +17,9 @@ public class ElixirOdolnosti extends Elixir {
         Hrac hrac = (Hrac)postava;
         hrac.getVybrataPostava().setSila(hrac.getVybrataPostava().getSila() * 0.9f);
     }
+
+    @Override
+    public String popisElixira() {
+        return "Zníži silu nepriateľa o 10%.";
+    }
 }

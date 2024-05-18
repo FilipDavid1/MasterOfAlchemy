@@ -14,4 +14,9 @@ public class ElixirSily extends Elixir {
         // TODO: zvys silu postavy
         postava.setSila(postava.getSila() + 0.2f);
     }
+
+    @Override
+    public String popisElixira() {
+        return "Zvýši silu postavy o 20%.";
+    }
 }

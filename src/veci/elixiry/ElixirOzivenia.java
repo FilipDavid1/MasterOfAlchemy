@@ -16,4 +16,9 @@ public class ElixirOzivenia extends Elixir {
             postava.pridajHp(100);
         }
     }
+
+    @Override
+    public String popisElixira() {
+        return "Oživí postavu.";
+    }
 }

@@ -16,4 +16,9 @@ public class ElixirSkrytia extends Elixir {
         Hrac hrac = (Hrac)postava;
         hrac.getVybrataPostava().setSila(0.0f, 5);
     }
+
+    @Override
+    public String popisElixira() {
+        return "Nepriatelia nemôžu útočiť na postavu počas 5 sekúnd.";
+    }
 }

@@ -13,4 +13,9 @@ public class ElixirObrany extends Elixir {
     public void pouzi(Postava postava) {
         // TODO: zvys obranu postavy
     }
+
+    @Override
+    public String popisElixira() {
+        return "Zvýši obranu postavy o 10%.";
+    }
 }

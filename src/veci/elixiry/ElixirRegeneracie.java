@@ -16,4 +16,9 @@ public class ElixirRegeneracie extends Elixir {
         Hrac hrac = (Hrac)postava;
         hrac.regenerujHp(5);
     }
+
+    @Override
+    public String popisElixira() {
+        return "Regeneruje 5HP postavy na 5 sekúnd.";
+    }
 }

@@ -81,4 +81,6 @@ public abstract class Elixir implements IVec {
         blokTextu.skry();
         this.obrazok.skry();
     }
+
+    public abstract String popisElixira();
 }

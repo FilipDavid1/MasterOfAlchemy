@@ -14,4 +14,9 @@ public class ElixirObnovenia extends Elixir {
         // TODO: obnov 20% zivotov postavy
         postava.pridajHp(postava.getHp() * 0.2f);
     }
+
+    @Override
+    public String popisElixira() {
+        return "Obnoví 20% životov postavy.";
+    }
 }

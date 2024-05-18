@@ -14,4 +14,9 @@ public class ElixirOdstraneniaKliadby extends Elixir {
     public void pouzi(Postava postava) {
         // TODO: neuber prve 2 utoky
     }
+
+    @Override
+    public String popisElixira() {
+        return "Odstráni prvé dva útoky.";
+    }
 }
