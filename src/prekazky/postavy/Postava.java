@@ -83,6 +83,8 @@ public abstract class Postava extends HernyObjekt {
         super.setY(y, super.getObrazok(), hpBar, super.getData());
         if (!(this instanceof Hrac)) {
             this.meno.zmenPolohu(x - 20, y - 20);
+        } else {
+            this.meno.zmenPolohu(x, y - 20);
         }
     }
 

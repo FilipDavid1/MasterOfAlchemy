@@ -13,8 +13,6 @@ import veci.elixiry.ElixirOzivenia;
 import veci.elixiry.ElixirRegeneracie;
 import veci.elixiry.ElixirSkrytia;
 import veci.elixiry.ElixirObnovenia;
-import veci.ingrediencie.Ingrediencia;
-import veci.IVec;
 import fri.shapesge.Kruh;
 import fri.shapesge.Manazer;
 
@@ -134,30 +132,24 @@ public class Hrac extends Postava {
             }
             casRegeneracie -= 200;
         }
+
+        if (super.getY() <= 0) {
+            super.posunNa(super.getX(), 0);
+        }
+
+        if (super.getY() >= 800) {
+            super.posunNa(super.getX(), 800);
+        }
+
     }
 
-    public boolean vyrobElixir(Ingrediencia[] potrebneIngrediencie) {
-        for (Ingrediencia i : potrebneIngrediencie) {
-            if (!this.inventar.obsahujeVec(i)) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     public Inventar getInventar() {
         return this.inventar;
     }
 
-    public void pridajVecDoInventara(IVec vec) {
-        this.inventar.pridajVec(vec);
-    }
-
-
-
 
     public void utocNaMonstra() {
-        System.out.println(super.getSila());
         if (this.vybrataPostava != null) {
             double vzdialenost = Math.sqrt(Math.pow(vybrataPostava.getX() - this.getX(), 2) + Math.pow(vybrataPostava.getY() - this.getY(), 2));
             if (vzdialenost < 200) {
