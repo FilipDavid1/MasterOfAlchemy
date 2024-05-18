@@ -116,3 +116,10 @@ pocetObrazkov: 8
 cestaKObrazku: resources/Obrazky/Monstra/Mag/Idle/Idle_
 x: 800
 y: 150
+
+typ: npc
+meno: Alchymista
+pocetObrazkov: 8
+cestaKObrazku: resources/Obrazky/NPC/Alchymista/Idle_
+x: 750
+y: 350
