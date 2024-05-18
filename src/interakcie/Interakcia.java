@@ -9,6 +9,9 @@ import veci.ingrediencie.Ingrediencia;
 import fri.shapesge.BlokTextu;
 import fri.shapesge.StylFontu;
 
+/**
+ * Trieda Interakcia zabezpečuje interakciu medzi hráčom a hernými objektmi.
+ */
 public class Interakcia {
     private Mapa mapa;
     private Inventar inventar;
@@ -19,6 +22,13 @@ public class Interakcia {
     private int casovac;
 
     private BlokTextu hp;
+
+    /**
+     * Konštruktor pre triedu Interakcia.
+     * @param mapa Mapa hry
+     * @param inventar Inventár hráča
+     * @param hrac Hráč
+     */
     public Interakcia(Mapa mapa, Inventar inventar, Hrac hrac) {
         this.mapa = mapa;
         this.inventar = inventar;
@@ -33,6 +43,10 @@ public class Interakcia {
         this.hp.zobraz();
     }
 
+    /**
+     * Metóda tik sa volá v každom cykle hry.
+     * Aktualizuje stav textových blokov a časovača.
+     */
     public void tik() {
         if (jeZobrazeny) {
             casovac--;
@@ -46,7 +60,12 @@ public class Interakcia {
         this.hp.zobraz();
     }
 
-
+    /**
+     * Metóda vyberSuradnice sa volá, keď hráč klikne na mapu.
+     * Kontroluje, či je na daných súradniciach nejaký objekt na interakciu.
+     * @param x X-súradnica kliknutia
+     * @param y Y-súradnica kliknutia
+     */
     public void vyberSuradnice(int x, int y) {
         if (jeVDosahu((x + Math.abs(this.mapa.getX())), (y + Math.abs(this.mapa.getY())))) {
             if (!this.zoberIngredienciu(x, y)) {
@@ -66,6 +85,13 @@ public class Interakcia {
         }
     }
 
+    /**
+     * Metóda vyberPostavu kontroluje, či je na daných súradniciach postava.
+     * Ak áno, hráč ju vyberie.
+     * @param x X-súradnica
+     * @param y Y-súradnica
+     * @return Pravdivostná hodnota, či bola vybraná postava
+     */
     private boolean vyberPostavu(int x, int y) {
         for (HernyObjekt hernyObjekt : mapa.getPrekazky()) {
             if (hernyObjekt instanceof Postava postava) {
@@ -83,12 +109,15 @@ public class Interakcia {
         return false;
     }
 
-
+    /**
+     * Metóda zoberIngredienciu kontroluje, či je na daných súradniciach ingrediencia.
+     * Ak áno, hráč ju zoberie.
+     * @param x X-súradnica
+     * @param y Y-súradnica
+     * @return Pravdivostná hodnota, či bola zobraná ingrediencia
+     */
     private boolean zoberIngredienciu(int x, int y) {
-        System.out.println("x: " + x + " y: " + y);
-        //prejdi ingrediencie z mapy ak tam nejake su a zober tu kde som klikol +- velkost obrazka
         for (Ingrediencia ingrediencia : mapa.getIngrediencie()) {
-            System.out.println("ingrediencia x: " + ingrediencia.getX() + " y: " + ingrediencia.getY());
             if (ingrediencia.getX() < x && ingrediencia.getX() + ingrediencia.getSirka() > x && ingrediencia.getY() < y && ingrediencia.getY() + ingrediencia.getVyska() > y) {
                 this.pridajIngredienciuDoInventara(ingrediencia);
                 this.blokTextu.zmenText("Zobral si ingredienciu: " + ingrediencia.getNazov());
@@ -102,13 +131,22 @@ public class Interakcia {
         return false;
     }
 
+    /**
+     * Metóda pridajIngredienciuDoInventara pridá ingredienciu do inventára hráča.
+     * @param ingrediencia Ingrediencia na pridanie
+     */
     private void pridajIngredienciuDoInventara(Ingrediencia ingrediencia) {
         this.inventar.pridajVec(ingrediencia);
         this.mapa.vymazIngredienciu(ingrediencia);
     }
 
+    /**
+     * Metóda jeVDosahu kontroluje, či sú dané súradnice v dosahu hráča.
+     * @param x X-súradnica
+     * @param y Y-súradnica
+     * @return Pravdivostná hodnota, či sú súradnice v dosahu
+     */
     private boolean jeVDosahu(int x, int y) {
-        //ak je x alebo y v mape rovne 0 tak over hracove x alebo y inak overuj v mape
         int dosah = 500;
         var hracX = (this.hrac.getX() + Math.abs(this.mapa.getX()));
         var hracY = (this.hrac.getY() + Math.abs(this.mapa.getY()));

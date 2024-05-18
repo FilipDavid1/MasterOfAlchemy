@@ -6,6 +6,9 @@ import veci.IVec;
 
 import java.util.ArrayList;
 
+/**
+ * Trieda Inventar reprezentuje inventár hráča.
+ */
 public class Inventar<E extends IVec> {
     private ArrayList< E> veci;
 
@@ -15,7 +18,9 @@ public class Inventar<E extends IVec> {
 
     private Elixir[] elixiry;
 
-
+    /**
+     * Konštruktor pre triedu Inventar.
+     */
     public Inventar() {
         this.veci = new ArrayList<>();
         this.inventarObrazok = new Obrazok("resources/Obrazky/Hrac/inventory.png");
@@ -26,6 +31,10 @@ public class Inventar<E extends IVec> {
         this.zobrazElixiry();
     }
 
+    /**
+     * Metóda pridajVec pridá vec do inventára.
+     * @param vec Vec na pridanie
+     */
     public void pridajVec(E vec) {
         if (vec instanceof Elixir) {
             for (int i = 0; i < this.elixiry.length; i++) {
@@ -40,6 +49,10 @@ public class Inventar<E extends IVec> {
         this.zobrazElixiry();
     }
 
+    /**
+     * Metóda odstranVec odstráni vec z inventára.
+     * @param vec Vec na odstránenie
+     */
     public void odstranVec(IVec vec) {
         if (vec instanceof Elixir) {
             for (int i = 0; i < this.elixiry.length; i++) {
@@ -53,6 +66,10 @@ public class Inventar<E extends IVec> {
         }
     }
 
+    /**
+     * Metóda odstranVeci odstráni zoznam vecí z inventára.
+     * @param veci Zoznam vecí na odstránenie
+     */
     public void odstranVeci(ArrayList<String> veci) {
         for (String vec : veci) {
             for (E e : this.veci) {
@@ -64,6 +81,9 @@ public class Inventar<E extends IVec> {
         }
     }
 
+    /**
+     * Metóda zobrazElixiry zobrazí elixíry v inventári.
+     */
     public void zobrazElixiry() {
         int zaciatokX = 450;
         int medzera = 60;
@@ -78,14 +98,15 @@ public class Inventar<E extends IVec> {
         }
     }
 
-
+    /**
+     * Metóda zobrazIngrediencieVInventari zobrazí ingrediencie v inventári.
+     */
     public void zobrazIngrediencieVInventari() {
         this.inventarObrazok.zmenPolohu(500, 200);
         this.inventarObrazok.zobraz();
 
         for (int i = 0; i < this.veci.size(); i++) {
             if ((this.veci.get(i) instanceof Ingrediencia ingrediencia)) {
-                //inventar ma 6 stlpcov a 5 riadkov
                 if (i == 0 || i == 6 || i == 12 || i == 18 || i == 24) {
                     ingrediencia.setX(530, ingrediencia.getObrazok(), ingrediencia.getBlokTextu());
                 } else {
@@ -96,16 +117,23 @@ public class Inventar<E extends IVec> {
         }
     }
 
+    /**
+     * Metóda skryIngrediencieSInventara skryje ingrediencie v inventári.
+     */
     public void skryIngrediencieSInventara() {
         this.inventarObrazok.skry();
         for (E vec : this.veci) {
             if ((vec instanceof Ingrediencia ingrediencia)) {
                 ingrediencia.skry();
-
             }
         }
     }
 
+    /**
+     * Metóda getVec vráti vec z inventára podľa názvu.
+     * @param vec Názov veci
+     * @return Vec s daným názvom
+     */
     public IVec getVec(String vec) {
         for (E e : veci) {
             if (e.getNazov().equals(vec)) {
@@ -115,20 +143,19 @@ public class Inventar<E extends IVec> {
         return null;
     }
 
-    public boolean obsahujeVec(IVec vec) {
-        return this.veci.contains(vec);
-    }
-
-    public void getVeci() {
-        for (IVec vec : veci) {
-            System.out.println(vec.getNazov());
-        }
-    }
-
+    /**
+     * Metóda getVeciList vráti zoznam všetkých vecí v inventári.
+     * @return Zoznam vecí v inventári
+     */
     public ArrayList<E> getVeciList() {
         return this.veci;
     }
 
+    /**
+     * Metóda pouziElixir umožní hráčovi použiť elixír z inventára.
+     * @param index Index elixíru v inventári
+     * @param hrac Hráč, ktorý používa elixír
+     */
     public void pouziElixir(int index, Hrac hrac) {
         if (index < this.elixiry.length && this.elixiry[index] != null) {
             System.out.println(index);

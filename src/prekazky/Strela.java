@@ -5,29 +5,40 @@ import prekazky.postavy.Postava;
 
 import static java.lang.Math.sqrt;
 
+/**
+ * Trieda Strela, ktorá reprezentuje strelu v hre.
+ */
 public class Strela {
     private float x;
     private float y;
     private final float rychlost;
-
     private double dlzka;
-
-    private final Obrazok kruh;
-
+    private final Obrazok projektil;
     private int animacia = 0;
-
     private final String cestaKObrazku;
 
+    /**
+     * Konštruktor pre triedu Strela.
+     *
+     * @param x X-ová pozícia na mape.
+     * @param y Y-ová pozícia na mape.
+     * @param rychlost Rýchlosť strely.
+     * @param cestaKObrazku Cesta k obrázku pre animáciu.
+     */
     public Strela(float x, float y, float rychlost, String cestaKObrazku) {
         this.x = x;
         this.y = y;
         this.rychlost = rychlost;
         this.cestaKObrazku = cestaKObrazku;
-        this.kruh = new Obrazok(cestaKObrazku + "/tile000.png");
-//        this.kruh.zmenPriemer(10);
-        this.kruh.zmenPolohu((int)x, (int)y);
+        this.projektil = new Obrazok(cestaKObrazku + "/tile000.png");
+        this.projektil.zmenPolohu((int)x, (int)y);
     }
 
+    /**
+     * Metóda aktualizuj, ktorá aktualizuje polohu strely a zobrazuje ju na novej pozícii.
+     *
+     * @param hrac Postava, ktorá vystrelila strelu.
+     */
     public void aktualizuj(Postava hrac) {
         float dx = hrac.getX() - x;
         float dy = hrac.getY() - y;
@@ -38,18 +49,31 @@ public class Strela {
 
         x += normDx * rychlost;
         y += normDy * rychlost;
-        this.kruh.zmenPolohu((int)x, (int)y);
-        this.kruh.zobraz();
+        this.projektil.zmenPolohu((int)x, (int)y);
+        this.projektil.zobraz();
     }
 
+    /**
+     * Metóda getDlzka, ktorá vráti dĺžku strely.
+     *
+     * @return double Dĺžka strely.
+     */
     public double getDlzka() {
         return dlzka;
     }
 
+    /**
+     * Metóda skry, ktorá skryje strelu.
+     */
     public void skry() {
-        this.kruh.skry();
+        this.projektil.skry();
     }
 
+    /**
+     * Metóda strelaAnimacia, ktorá vykonáva animáciu strely.
+     *
+     * @param pocetObrazkov Počet obrázkov pre animáciu.
+     */
     public void strelaAnimacia(int pocetObrazkov) {
         animacia++;
         if (animacia >= pocetObrazkov) {
@@ -57,12 +81,9 @@ public class Strela {
         }
 
         if (animacia < 10)  {
-            this.kruh.zmenObrazok(this.cestaKObrazku + "/tile00" + animacia + ".png");
+            this.projektil.zmenObrazok(this.cestaKObrazku + "/tile00" + animacia + ".png");
         } else {
-            this.kruh.zmenObrazok(this.cestaKObrazku + "/tile0" + animacia + ".png");
+            this.projektil.zmenObrazok(this.cestaKObrazku + "/tile0" + animacia + ".png");
         }
-
     }
 }
-
-

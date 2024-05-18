@@ -1,9 +1,16 @@
 package prekazky.postavy;
 
+/**
+ * Enum OrientaciaPostavy, ktorý reprezentuje možné orientácie postavy.
+ */
 public enum OrientaciaPostavy {
     LEFT, RIGHT, UP, DOWN;
 
-
+    /**
+     * Metóda toString, ktorá vráti reťazec reprezentujúci orientáciu postavy.
+     *
+     * @return String Reťazec reprezentujúci orientáciu postavy.
+     */
     public String toString() {
         switch (this) {
             case LEFT:

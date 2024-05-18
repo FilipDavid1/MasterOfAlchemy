@@ -14,9 +14,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Trieda NacitavaniePrekazok slúži na načítanie prekážok z textového súboru.
+ */
 public class NacitavaniePrekazok {
     private Mapa mapa;
 
+    /**
+     * Konštruktor pre triedu NacitavaniePrekazok.
+     * @param mapa Mapa hry
+     * @param manazer Manažér pre správu objektov
+     */
     public NacitavaniePrekazok(Mapa mapa, Manazer manazer) {
         this.mapa = mapa;
         List<Map<String, String>> prekazkyData = null;
@@ -27,7 +35,6 @@ public class NacitavaniePrekazok {
         }
 
         if (prekazkyData != null) {
-            System.out.println("Pocet prekazok: " + prekazkyData.size());
             for (Map<String, String> prekazkaData : prekazkyData) {
                 String typ = prekazkaData.get("typ");
                 String meno = prekazkaData.get("meno");
@@ -39,15 +46,19 @@ public class NacitavaniePrekazok {
                 HernyObjekt prekazka = this.vytvorObjekt(typ, meno, pocetObrazkov, cestaKObrazku, xPrekazka, yPrekazka);
 
                 if (prekazka != null) {
-                    System.out.println("Pridavam prekazku: " + prekazka);
                     mapa.pridajPrekazku(prekazka);
                     manazer.spravujObjekt(prekazka);
                 }
             }
         }
-
     }
 
+    /**
+     * Metóda nacitajPrekazky načíta prekážky z textového súboru.
+     * @param subor Cesta k textovému súboru
+     * @return Zoznam prekážok
+     * @throws IOException Chyba pri čítaní súboru
+     */
     public List<Map<String, String>> nacitajPrekazky(String subor) throws IOException {
         List<Map<String, String>> zaznamy = new ArrayList<>();
         BufferedReader citac = new BufferedReader(new FileReader(subor));
@@ -55,7 +66,6 @@ public class NacitavaniePrekazok {
 
         Map<String, String> aktualnyZaznam = new HashMap<>();
         while ((riadok = citac.readLine()) != null) {
-            System.out.println(riadok);
             if (riadok.isEmpty()) {
                 zaznamy.add(aktualnyZaznam);
                 aktualnyZaznam = new HashMap<>();
@@ -74,8 +84,16 @@ public class NacitavaniePrekazok {
         return zaznamy;
     }
 
-
-
+    /**
+     * Metóda vytvorObjekt vytvorí herný objekt na základe dát z textového súboru.
+     * @param typ Typ objektu
+     * @param meno Meno objektu
+     * @param pocetObrazkov Počet obrázkov objektu
+     * @param cestaKObrazku Cesta k obrázku objektu
+     * @param x X-súradnica objektu
+     * @param y Y-súradnica objektu
+     * @return Vytvorený herný objekt
+     */
     public HernyObjekt vytvorObjekt(String typ, String meno, int pocetObrazkov, String cestaKObrazku, int x, int y) {
         try {
             String plneMenoTriedy;
@@ -86,7 +104,6 @@ public class NacitavaniePrekazok {
             } else {
                 plneMenoTriedy = meno;
             }
-            System.out.println("Vytvaram objekt: " + plneMenoTriedy);
             Class<?> clazz = Class.forName(plneMenoTriedy);
             Constructor<?> ctor = clazz.getConstructor(int.class, String.class, int.class, int.class, Postava.class);
             return (HernyObjekt)ctor.newInstance(pocetObrazkov, cestaKObrazku, x, y, mapa.getHrac());
@@ -95,6 +112,4 @@ public class NacitavaniePrekazok {
         }
         return null;
     }
-
-
 }
