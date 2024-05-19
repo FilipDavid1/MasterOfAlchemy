@@ -37,7 +37,7 @@ public class ElixirSily extends Elixir {
      * @return String, ktorý popisuje, čo elixír robí.
      */
     @Override
-    public String popisElixira() {
+    public String getPopisElixira() {
         return "Zvýši silu postavy o 20%.";
     }
 }

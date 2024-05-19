@@ -213,7 +213,7 @@ public class Mapa {
                     if (postava instanceof StrelecMonstrum strelec) {
                         strelec.zmazStrely();
                     }
-
+                    postava.skry();
                     mrtvePrekazky.add(prekazka);
                     //manazer prestane spravovat objekt
                     manazer.prestanSpravovatObjekt(postava);

@@ -47,7 +47,7 @@ public class Alchymista extends Postava {
                 Class<?> clazz = Class.forName("veci.elixiry." + elixir);
                 Constructor<?> ctor = clazz.getConstructor(String.class);
                 Elixir elixirObj = (Elixir)ctor.newInstance(elixir);
-                elixiryNaNovychRiadkoch.append(elixirObj.getNazov()).append(" - ").append(elixirObj.popisElixira()).append("\n");
+                elixiryNaNovychRiadkoch.append(elixirObj.getNazov()).append(" - ").append(elixirObj.getPopisElixira()).append("\n");
             } catch (Exception e) {
                 e.printStackTrace();
             }

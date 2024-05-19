@@ -136,5 +136,5 @@ public abstract class Elixir implements IVec {
      *
      * @return String Popis elixíru.
      */
-    public abstract String popisElixira();
+    public abstract String getPopisElixira();
 }

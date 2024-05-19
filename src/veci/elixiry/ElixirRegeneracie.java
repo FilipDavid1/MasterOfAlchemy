@@ -39,7 +39,7 @@ public class ElixirRegeneracie extends Elixir {
      * @return String, ktorý popisuje, čo elixír robí.
      */
     @Override
-    public String popisElixira() {
+    public String getPopisElixira() {
         return "Regeneruje 5HP postavy na 5 sekúnd.";
     }
 }

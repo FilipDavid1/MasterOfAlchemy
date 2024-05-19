@@ -20,12 +20,12 @@ import fri.shapesge.Manazer;
  * Trieda Hrac reprezentuje hráča v hre.
  */
 public class Hrac extends Postava {
-    private final Mapa mapa; // Mapa hry
-    private final Kruh kruh; // Kruh okolo hráča
-    private Inventar inventar; // Inventár hráča
-    private Interakcia interakcia; // Interakcia hráča s objektami na mape
-    private Postava vybrataPostava; // Vybratá postava na mape
-    private int casRegeneracie; // Čas regenerácie hráča
+    private final Mapa mapa;
+    private final Kruh kruh;
+    private Inventar inventar;
+    private Interakcia interakcia;
+    private Postava vybrataPostava;
+    private int casRegeneracie;
 
     /**
      * Konštruktor pre triedu Hrac.
@@ -129,7 +129,7 @@ public class Hrac extends Postava {
     public void stop() {
         this.nehybeSa();
         this.kruh.skry();
-        this.inventar.skryIngrediencieSInventara();
+        this.inventar.skryIngrediencieZInventara();
     }
 
     /**
@@ -198,10 +198,10 @@ public class Hrac extends Postava {
 
     /**
      * Metóda vyberPostavu umožní hráčovi vybrať postavu.
-     * @param monstum Postava na výber
+     * @param postava Postava na výber
      */
-    public void vyberPostavu(Postava monstum) {
-        this.vybrataPostava = monstum;
+    public void vyberPostavu(Postava postava) {
+        this.vybrataPostava = postava;
     }
 
 

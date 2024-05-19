@@ -120,7 +120,7 @@ public class Inventar<E extends IVec> {
     /**
      * Metóda skryIngrediencieSInventara skryje ingrediencie v inventári.
      */
-    public void skryIngrediencieSInventara() {
+    public void skryIngrediencieZInventara() {
         this.inventarObrazok.skry();
         for (E vec : this.veci) {
             if ((vec instanceof Ingrediencia ingrediencia)) {

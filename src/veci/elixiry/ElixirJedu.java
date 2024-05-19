@@ -38,7 +38,7 @@ public class ElixirJedu extends Elixir {
      * @return String Popis elixíru.
      */
     @Override
-    public String popisElixira() {
+    public String getPopisElixira() {
         return "Otrávi vybranú postavu na 10 sekúnd.";
     }
 }

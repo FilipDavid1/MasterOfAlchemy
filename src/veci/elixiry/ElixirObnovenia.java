@@ -35,7 +35,7 @@ public class ElixirObnovenia extends Elixir {
      * @return String Popis elixíru.
      */
     @Override
-    public String popisElixira() {
+    public String getPopisElixira() {
         return "Obnoví 20% životov postavy.";
     }
 }

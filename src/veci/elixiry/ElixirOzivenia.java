@@ -39,7 +39,7 @@ public class ElixirOzivenia extends Elixir {
      * @return String, ktorý popisuje, čo elixír robí.
      */
     @Override
-    public String popisElixira() {
+    public String getPopisElixira() {
         return "Oživí postavu.";
     }
 }

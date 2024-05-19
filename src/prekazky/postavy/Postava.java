@@ -119,6 +119,7 @@ public abstract class Postava extends HernyObjekt {
     public void skry() {
         super.skryObrazok();
         this.hpBar.skry();
+        this.meno.skry();
     }
 
     /**

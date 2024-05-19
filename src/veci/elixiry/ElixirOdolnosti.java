@@ -38,7 +38,7 @@ public class ElixirOdolnosti extends Elixir {
      * @return String Popis elixíru.
      */
     @Override
-    public String popisElixira() {
+    public String getPopisElixira() {
         return "Zníži silu nepriateľa o 10%.";
     }
 }

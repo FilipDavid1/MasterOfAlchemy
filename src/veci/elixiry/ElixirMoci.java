@@ -36,7 +36,7 @@ public class ElixirMoci extends Elixir {
      * @return String Popis elixíru.
      */
     @Override
-    public String popisElixira() {
+    public String getPopisElixira() {
         return "Zvýši silu postavy o 10%.";
     }
 }
